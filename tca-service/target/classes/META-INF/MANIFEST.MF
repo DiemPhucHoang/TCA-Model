@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1584441288810
+Build-Jdk: 1.8.0_211
+Built-By: nminhtuan
+Bundle-Blueprint: OSGI-INF/blueprint/blueprint.xml
+Bundle-ManifestVersion: 2
+Bundle-Name: tca/tca-service
+Bundle-SymbolicName: org.example.tca.service
+Bundle-Version: 1.0.0.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+DynamicImport-Package: org.hibernate.proxy,javassist.util.proxy
+Export-Package: org.example.tca.service;uses:="org.example.tca.exception
+ ,org.example.tca.vo";version="1.0.0",org.example.tca.vo;uses:="org.exam
+ ple.tca.api";version="1.0.0",org.example.tca.response;version="1.0.0",o
+ rg.example.tca.exception;version="1.0.0"
+Import-Package: javax.persistence;version="[2,3)",javax.transaction;vers
+ ion="[1.2,2)",org.example.tca.api;version="[1.0,2)",org.example.tca.exc
+ eption,org.example.tca.service,org.osgi.service.blueprint;version="[1.0
+ .0,2.0.0)",org.hibernate.proxy;resolution:=optional;version="[5.4,6)",j
+ avassist.util.proxy;resolution:=optional;version="[3.24,4)"
+Include-Resource: META-INF/persistence.xml=src/main/resources/META-INF/p
+ ersistence.xml,OSGI-INF/blueprint/blueprint.xml=src/main/resources/OSGI
+ -INF/blueprint/blueprint.xml
+Meta-Persistence: META-INF/persistence.xml
+Private-Package: org.example.tca.persistence,org.example.tca.service.imp
+ l,org.example.tca.dao,org.example.tca.dao.impl,org.example.tca.util
+Tool: Bnd-4.2.0.201903051501

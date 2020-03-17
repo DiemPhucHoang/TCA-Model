@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<features name="jpa-${project.version}"
+          xmlns="http://karaf.apache.org/xmlns/features/v1.3.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.3.0 http://karaf.apache.org/xmlns/features/v1.3.0">
+
+    <repository>mvn:org.apache.cxf.karaf/apache-cxf/${cxf.version}/xml/features</repository>
+    <repository>mvn:org.apache.aries.jax.rs/org.apache.aries.jax.rs.features/1.0.3/xml</repository>
+
+    <feature name="tca-api" version="${project.version}">
+        <feature>transaction</feature>
+        <feature>jndi</feature>
+        <feature>pax-jdbc-config</feature>
+        <feature>pax-jdbc-mariadb</feature>
+        <feature>pax-jdbc-pool-dbcp2</feature>
+        <feature>jdbc</feature>
+        <feature dependency="true">aries-blueprint</feature>
+        <feature version="[2,3)">jpa</feature>
+        <feature version="[5,6)">hibernate</feature>
+        <bundle>mvn:org.example.tca/tca-api/${project.version}</bundle>
+    </feature>
+
+    <feature name="tca-service" version="${project.version}">
+        <feature version="${project.version}">tca-api</feature>
+        <bundle>mvn:org.example.tca/tca-service/${project.version}</bundle>
+    </feature>
+
+    <feature name="tca-rest" version="${project.version}">
+        <feature>cxf</feature>
+        <feature dependency="true">http</feature>
+        <requirement>osgi.service;effective:=active;filter:=(objectClass=org.osgi.service.http.HttpService)</requirement>
+        <feature dependency="true">aries-blueprint</feature>
+        <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-core/${jackson.version}</bundle>
+        <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-annotations/${jackson.version}</bundle>
+        <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-databind/${jackson.version}</bundle>
+        <bundle dependency="true">mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-base/${jackson.version}</bundle>
+        <bundle dependency="true">mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-json-provider/${jackson.version}</bundle>
+        <feature version="${project.version}">tca-service</feature>
+        <bundle>mvn:org.example.tca/tca-rest/${project.version}</bundle>
+    </feature>
+
+</features>
