@@ -12,11 +12,14 @@ public interface ThresholdService {
 
     ThresholdVO getThreshold(String name, String family, String objectType, String tcaLabel) throws ModelException;
 
-    void addThreshold(String name, String family, ThresholdVO thresholdVO) throws ModelException, ThresholdException;
+    void addThreshold(String name, String family, ThresholdVO thresholdVO)
+            throws ModelException, ThresholdException;
 
-    void updateThreshold(String name, String family, String objectType, String tcaLabel, ThresholdVO thresholdVO) throws ModelException, ThresholdException;
+    void updateThreshold(String name, String family, String objectType, String tcaLabel, ThresholdVO thresholdVO)
+            throws ModelException, ThresholdException;
 
-    void deleteThreshold(String name, String family, String objectType, String tcaLabel) throws ModelException, ThresholdException;
+    void deleteThreshold(String name, String family, String objectType, String tcaLabel)
+            throws ModelException, ThresholdException;
 
     void deleteAllThreshold(String name, String family) throws ModelException;
 }

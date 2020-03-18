@@ -2,8 +2,10 @@ package org.example.tca.rest.impl;
 
 import org.example.tca.rest.CentralizedRest;
 import org.example.tca.rest.ModelRest;
+import org.example.tca.rest.RuleRest;
 import org.example.tca.rest.ThresholdRest;
 import org.example.tca.vo.ModelVO;
+import org.example.tca.vo.RuleVO;
 import org.example.tca.vo.ThresholdVO;
 
 import javax.ws.rs.core.Response;
@@ -13,10 +15,12 @@ public class CentralizedRestImpl implements CentralizedRest {
 
     private ModelRest m_modelRest;
     private ThresholdRest m_thresholdRest;
+    private RuleRest m_ruleRest;
 
-    public CentralizedRestImpl(ModelRest tcaRest, ThresholdRest thresholdRest) {
-        m_modelRest = tcaRest;
-        m_thresholdRest = thresholdRest;
+    public CentralizedRestImpl(ModelRest tcaRest, ThresholdRest thresholdRest, RuleRest ruleRest) {
+        this.m_modelRest = tcaRest;
+        this.m_thresholdRest = thresholdRest;
+        this.m_ruleRest = ruleRest;
     }
 
     @Override
@@ -79,4 +83,33 @@ public class CentralizedRestImpl implements CentralizedRest {
         return m_thresholdRest.deleteAllThreshold(name, family);
     }
 
+    @Override
+    public Response listRule(String name, String family, String objectType, String tcaLable) {
+        return m_ruleRest.listRule(name, family, objectType, tcaLable);
+    }
+
+    @Override
+    public Response getRule(String name, String family, String objectType, String tcaLable, Long id) {
+        return m_ruleRest.getRule(name, family, objectType, tcaLable, id);
+    }
+
+    @Override
+    public Response addRule(String name, String family, String objectType, String tcaLable, RuleVO ruleVO) {
+        return m_ruleRest.addRule(name, family, objectType, tcaLable, ruleVO);
+    }
+
+    @Override
+    public Response updateRule(String name, String family, String objectType, String tcaLable, Long id, RuleVO ruleVO) {
+        return m_ruleRest.updateRule(name, family, objectType, tcaLable, id, ruleVO);
+    }
+
+    @Override
+    public Response deleteRule(String name, String family, String objectType, String tcaLable, Long id) {
+        return m_ruleRest.deleteRule(name, family, objectType, tcaLable, id);
+    }
+
+    @Override
+    public Response deleteAllRule(String name, String family, String objectType, String tcaLable) {
+        return m_ruleRest.deleteAllRule(name, family, objectType, tcaLable);
+    }
 }

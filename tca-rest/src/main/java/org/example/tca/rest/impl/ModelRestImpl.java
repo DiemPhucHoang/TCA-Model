@@ -1,6 +1,7 @@
 package org.example.tca.rest.impl;
 
 import org.example.tca.rest.ModelRest;
+import org.example.tca.rest.TCARestUtil;
 import org.example.tca.service.CentralizedService;
 import org.example.tca.vo.ModelVO;
 
@@ -33,9 +34,9 @@ public class ModelRestImpl implements ModelRest {
     public Response addModel(ModelVO modelVO) {
         try {
             m_service.addModel(modelVO);
-            return printPassResponse("Added model successfully");
+            return TCARestUtil.printPassResponse("Added model for " + TCARestUtil.printPath(modelVO.getName(), modelVO.getFamily()) + " successfully");
         } catch (Exception e) {
-            return printFailResponse("Add model fail", e);
+            return TCARestUtil.printFailResponse("Added model for " + TCARestUtil.printPath(modelVO.getName(), modelVO.getFamily()) + " failed", e);
         }
     }
 
@@ -43,9 +44,9 @@ public class ModelRestImpl implements ModelRest {
     public Response updateModel(String name, String family, ModelVO modelVO) {
         try {
             m_service.updateModel(name, family, modelVO);
-            return printPassResponse("Updated model successfully");
+            return TCARestUtil.printPassResponse("Updated model for " + TCARestUtil.printPath(name, family) + " successfully");
         } catch (Exception e) {
-            return printFailResponse("Update model fail", e);
+            return TCARestUtil.printFailResponse("Updated model for " + TCARestUtil.printPath(name, family) + " failed", e);
         }
     }
 
@@ -53,9 +54,9 @@ public class ModelRestImpl implements ModelRest {
     public Response deleteModel(String name, String family) {
         try {
             m_service.deleteModel(name, family);
-            return printPassResponse("Deleted model successfully");
+            return TCARestUtil.printPassResponse("Deleted model for " + TCARestUtil.printPath(name, family) + " successfully");
         } catch (Exception e) {
-            return printFailResponse("Delete model fail", e);
+            return TCARestUtil.printFailResponse("Deleted model for " + TCARestUtil.printPath(name, family) + " failed", e);
         }
     }
 
@@ -63,9 +64,9 @@ public class ModelRestImpl implements ModelRest {
     public Response deleteAllModel() {
         try {
             m_service.deleteAllModel();
-            return printPassResponse("Delete all model successfully");
+            return TCARestUtil.printPassResponse("Delete all model successfully");
         } catch (Exception e) {
-            return printFailResponse("Delete all model fail", e);
+            return TCARestUtil.printFailResponse("Delete all model fail", e);
         }
     }
 }

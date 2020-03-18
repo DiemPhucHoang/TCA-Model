@@ -10,6 +10,7 @@
 
     <bean id="persistenceUtil" class="org.example.tca.persistence.PersistenceUtil"/>
 
+    <!--DAO-->
     <bean id="modelDAO" class="org.example.tca.dao.impl.ModelDAOImpl">
         <argument ref="persistenceUtil"/>
     </bean>
@@ -18,6 +19,11 @@
         <argument ref="persistenceUtil"/>
     </bean>
 
+    <bean id="ruleDAO" class="org.example.tca.dao.impl.RuleDAOImpl">
+        <argument ref="persistenceUtil"/>
+    </bean>
+
+    <!--Service-->
     <bean id="modelService" class="org.example.tca.service.impl.ModelServiceImpl">
         <argument ref="modelDAO"/>
     </bean>
@@ -27,9 +33,17 @@
         <argument ref="thresholdDAO"/>
     </bean>
 
+    <bean id="ruleService" class="org.example.tca.service.impl.RuleServiceImpl">
+        <argument ref="modelDAO"/>
+        <argument ref="thresholdDAO"/>
+        <argument ref="ruleDAO"/>
+    </bean>
+
+
     <bean id="centralizedService" class="org.example.tca.service.impl.CentralizedServiceImpl">
         <argument ref="modelService"/>
         <argument ref="thresholdService"/>
+        <argument ref="ruleService"/>
     </bean>
 
 

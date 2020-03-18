@@ -78,7 +78,6 @@ public class ThresholdServiceImpl implements ThresholdService {
     public void deleteThreshold(String name, String family, String objectType, String tcaLabel)
             throws ModelException, ThresholdException {
         Model modelDB = getModelDB(name, family);
-
         try {
             m_thresholdDAO.delete(modelDB, objectType, tcaLabel);
         } catch (Exception e) {
@@ -89,7 +88,6 @@ public class ThresholdServiceImpl implements ThresholdService {
     @Override
     public void deleteAllThreshold(String name, String family) throws ModelException {
         Model modelDB = getModelDB(name, family);
-
         try {
             m_thresholdDAO.deleteAll(modelDB);
         } catch (Exception e) {

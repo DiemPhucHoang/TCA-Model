@@ -1,9 +1,0 @@
-org/example/tca/api/Aggregation.class
-org/example/tca/api/Alarm.class
-org/example/tca/api/Operator.class
-org/example/tca/api/ConditionLogicalOperator.class
-org/example/tca/api/Condition.class
-org/example/tca/api/Model.class
-org/example/tca/api/PerceivedSeverity.class
-org/example/tca/api/Rule.class
-org/example/tca/api/Threshold.class

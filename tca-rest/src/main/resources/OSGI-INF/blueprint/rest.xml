@@ -39,7 +39,7 @@
 
     <reference id="centralizedService" interface="org.example.tca.service.CentralizedService"/>
 
-    <bean id="tcaBean" class="org.example.tca.rest.impl.ModelRestImpl" >
+    <bean id="modelBean" class="org.example.tca.rest.impl.ModelRestImpl" >
         <argument ref="centralizedService"/>
     </bean>
 
@@ -47,9 +47,14 @@
         <argument ref="centralizedService"/>
     </bean>
 
+    <bean id="ruleBean" class="org.example.tca.rest.impl.RuleRestImpl" >
+        <argument ref="centralizedService"/>
+    </bean>
+
     <bean id="centralizedBean" class="org.example.tca.rest.impl.CentralizedRestImpl" >
-        <argument ref="tcaBean"/>
+        <argument ref="modelBean"/>
         <argument ref="thresholdBean"/>
+        <argument ref="ruleBean"/>
     </bean>
 
 </blueprint>

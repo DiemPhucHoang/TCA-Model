@@ -46,11 +46,11 @@ public class RuleDAOImpl implements RuleDAO {
         try {
             rule.setThreshold(threshold);
             m_entityManager.persist(rule);
-            Object id = m_entityManager.getEntityManagerFactory().getPersistenceUnitUtil().getIdentifier(threshold);
+            Object id = m_entityManager.getEntityManagerFactory().getPersistenceUnitUtil().getIdentifier(rule);
             if (id instanceof Long) {
                 return (long) id;
             } else {
-                throw new RuleException("Could not get threshold id");
+                throw new RuleException("Could not get rule id");
             }
         } catch (Exception e) {
             throw new RuleException(e.getMessage());
@@ -67,6 +67,7 @@ public class RuleDAOImpl implements RuleDAO {
         }
 
         try {
+            ruleDB.setThreshold(threshold);
             ruleDB.setConditionLogicalOperator(rule.getConditionLogicalOperator());
             ruleDB.setAggregator(rule.getAggregator());
             ruleDB.setAggregationPeriod(rule.getAggregationPeriod());

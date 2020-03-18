@@ -35,7 +35,7 @@ public class ThresholdRestImpl implements ThresholdRest {
                     .entity(m_service.getThreshold(name, family, objectType, tcaLable))
                     .build();
         } catch (Exception e) {
-            return TCARestUtil.printFailResponse("Get all thresholds for " + TCARestUtil.printPath(name, family, objectType, tcaLable) + " failed", e);
+            return TCARestUtil.printFailResponse("Get threshold for " + TCARestUtil.printPath(name, family, objectType, tcaLable) + " failed", e);
         }
     }
 

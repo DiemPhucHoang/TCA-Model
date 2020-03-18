@@ -7,8 +7,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="tca-service" />
-        <module name="tca-api" />
         <module name="tca-rest" />
+        <module name="tca-api" />
       </profile>
     </annotationProcessing>
   </component>

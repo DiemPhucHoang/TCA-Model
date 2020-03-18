@@ -77,7 +77,7 @@ public class ModelDAOImpl implements ModelDAO {
 
     private void updateExistsModel(Model modelDB, Model model, String name, String family) throws ModelException {
         if (model == null) {
-            throw new ModelException("Invalid info");
+            throw new ModelException("Invalid model info");
         }
         if (!name.equals(model.getName()) || !family.equals(model.getFamily())) {
             throw new ModelException("Model name or family are not allowed to edit");
@@ -86,7 +86,7 @@ public class ModelDAOImpl implements ModelDAO {
         modelDB.setDescription(model.getDescription());
         modelDB.setBuild(model.getBuild());
         modelDB.setVersion(model.getVersion());
-        modelDB.setDate(model.getDate());
+//        modelDB.setDate(model.getDate());
     }
 
     @Override

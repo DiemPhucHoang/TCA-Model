@@ -1,4 +1,4 @@
 package org.example.tca.service;
 
-public interface CentralizedService extends ModelService, ThresholdService {
+public interface CentralizedService extends ModelService, ThresholdService, RuleService {
 }

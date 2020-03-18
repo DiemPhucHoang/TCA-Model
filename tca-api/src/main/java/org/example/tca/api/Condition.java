@@ -56,6 +56,19 @@ public class Condition {
     public Condition() {
     }
 
+    public Condition(String attributeName, String attributeGuiName, String objectType, Operator operator,
+                     Long value, Operator clearOperator, Long clearValue, Boolean rate, Double counterMax) {
+        this.attributeName = attributeName;
+        this.attributeGuiName = attributeGuiName;
+        this.objectType = objectType;
+        this.operator = operator;
+        this.value = value;
+        this.clearOperator = clearOperator;
+        this.clearValue = clearValue;
+        this.rate = rate;
+        this.counterMax = counterMax;
+    }
+
     public long getId() {
         return id;
     }
