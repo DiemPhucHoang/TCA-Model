@@ -11,16 +11,16 @@ public interface RuleService {
     List<RuleVO> getRules(String name, String family, String objectType, String tcaLabel)
             throws ModelException, ThresholdException, RuleException;
 
-    RuleVO getRule(String name, String family, String objectType, String tcaLabel, long id)
+    RuleVO getRule(String name, String family, String objectType, String tcaLabel, Long id)
             throws ModelException, ThresholdException, RuleException;
 
     void addRule(String name, String family, String objectType, String tcaLabel, RuleVO ruleVO)
             throws ModelException, ThresholdException, RuleException;
 
-    void updateRule(String name, String family, String objectType, String tcaLabel, long id, RuleVO ruleVO)
+    void updateRule(String name, String family, String objectType, String tcaLabel, Long id, RuleVO ruleVO)
             throws ModelException, ThresholdException, RuleException;
 
-    void deleteRule(String name, String family, String objectType, String tcaLabel, long id)
+    void deleteRule(String name, String family, String objectType, String tcaLabel, Long id)
             throws ModelException, ThresholdException, RuleException;
 
     void deleteAllRule(String name, String family, String objectType, String tcaLabel)

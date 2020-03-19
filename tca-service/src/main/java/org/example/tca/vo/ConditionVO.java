@@ -1,29 +1,29 @@
 package org.example.tca.vo;
 
 import org.example.tca.api.Condition;
-import org.example.tca.api.Operator;
 
 public class ConditionVO {
     private String attributeName;
     private String attributeGuiName;
     private String objectType;
-    private Operator operator;
+    private String operator;
     private Long value;
-    private Operator clearOperator;
+    private String clearOperator;
     private Long clearValue;
     private Boolean rate;
-    private Double counterMax;
+
+    public ConditionVO() {
+    }
 
     public ConditionVO(Condition condition) {
         this.attributeName = condition.getAttributeName();
         this.attributeGuiName = condition.getAttributeGuiName();
         this.objectType = condition.getObjectType();
-        this.operator = condition.getOperator();
+        this.operator = condition.getOperator().getKey();
         this.value = condition.getValue();
-        this.clearOperator = condition.getClearOperator();
+        this.clearOperator = condition.getClearOperator().getKey();
         this.clearValue = condition.getClearValue();
         this.rate = condition.getRate();
-        this.counterMax = condition.getCounterMax();
     }
 
     public String getAttributeName() {
@@ -50,11 +50,11 @@ public class ConditionVO {
         this.objectType = objectType;
     }
 
-    public Operator getOperator() {
+    public String getOperator() {
         return operator;
     }
 
-    public void setOperator(Operator operator) {
+    public void setOperator(String operator) {
         this.operator = operator;
     }
 
@@ -66,11 +66,11 @@ public class ConditionVO {
         this.value = value;
     }
 
-    public Operator getClearOperator() {
+    public String getClearOperator() {
         return clearOperator;
     }
 
-    public void setClearOperator(Operator clearOperator) {
+    public void setClearOperator(String clearOperator) {
         this.clearOperator = clearOperator;
     }
 
@@ -90,14 +90,6 @@ public class ConditionVO {
         this.rate = rate;
     }
 
-    public Double getCounterMax() {
-        return counterMax;
-    }
-
-    public void setCounterMax(Double counterMax) {
-        this.counterMax = counterMax;
-    }
-
     @Override
     public String toString() {
         return "ConditionVO{" +
@@ -109,7 +101,6 @@ public class ConditionVO {
                 ", clearOperator=" + clearOperator +
                 ", clearValue=" + clearValue +
                 ", rate=" + rate +
-                ", counterMax=" + counterMax +
                 '}';
     }
 }

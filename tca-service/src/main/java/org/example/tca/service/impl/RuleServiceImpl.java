@@ -22,6 +22,13 @@ public class RuleServiceImpl implements RuleService {
     private ThresholdDAO m_thresholdDAO;
     private RuleDAO m_ruleDAO;
 
+
+    public RuleServiceImpl(ModelDAO modelDAO, ThresholdDAO thresholdDAO, RuleDAO ruleDAO) {
+        m_modelDAO = modelDAO;
+        m_thresholdDAO = thresholdDAO;
+        m_ruleDAO = ruleDAO;
+    }
+
     @Override
     public List<RuleVO> getRules(String name, String family, String objectType, String tcaLabel)
             throws ModelException, ThresholdException, RuleException {
@@ -38,7 +45,7 @@ public class RuleServiceImpl implements RuleService {
     }
 
     @Override
-    public RuleVO getRule(String name, String family, String objectType, String tcaLabel, long id)
+    public RuleVO getRule(String name, String family, String objectType, String tcaLabel, Long id)
             throws ModelException, ThresholdException, RuleException {
         Threshold thresholdDB = getThresholdDB(name, family, objectType, tcaLabel);
         Rule rule = m_ruleDAO.get(thresholdDB, id);
@@ -58,7 +65,7 @@ public class RuleServiceImpl implements RuleService {
     }
 
     @Override
-    public void updateRule(String name, String family, String objectType, String tcaLabel, long id, RuleVO ruleVO)
+    public void updateRule(String name, String family, String objectType, String tcaLabel, Long id, RuleVO ruleVO)
             throws ModelException, ThresholdException, RuleException {
         Threshold thresholdDB = getThresholdDB(name, family, objectType, tcaLabel);
         try {
@@ -69,7 +76,7 @@ public class RuleServiceImpl implements RuleService {
     }
 
     @Override
-    public void deleteRule(String name, String family, String objectType, String tcaLabel, long id)
+    public void deleteRule(String name, String family, String objectType, String tcaLabel, Long id)
             throws ModelException, ThresholdException, RuleException {
         Threshold thresholdDB = getThresholdDB(name, family, objectType, tcaLabel);
         try {

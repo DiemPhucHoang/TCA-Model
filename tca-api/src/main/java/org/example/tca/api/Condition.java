@@ -11,15 +11,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity (name = "Condition")
 @Table (name = "tca_condition")
-public class Condition {
+public class Condition implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @Column(name = "attribute_name", length = 128, unique = true)
     private String attributeName;
@@ -57,7 +58,7 @@ public class Condition {
     }
 
     public Condition(String attributeName, String attributeGuiName, String objectType, Operator operator,
-                     Long value, Operator clearOperator, Long clearValue, Boolean rate, Double counterMax) {
+                     Long value, Operator clearOperator, Long clearValue, Boolean rate) {
         this.attributeName = attributeName;
         this.attributeGuiName = attributeGuiName;
         this.objectType = objectType;
@@ -65,15 +66,14 @@ public class Condition {
         this.value = value;
         this.clearOperator = clearOperator;
         this.clearValue = clearValue;
-        this.rate = rate;
-        this.counterMax = counterMax;
+        this.rate = rate == null ? false : rate;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -1,12 +1,18 @@
 package org.example.tca.service.impl;
 
+import org.example.tca.exception.AlarmException;
+import org.example.tca.exception.ConditionExeption;
 import org.example.tca.exception.ModelException;
 import org.example.tca.exception.RuleException;
 import org.example.tca.exception.ThresholdException;
+import org.example.tca.service.AlarmService;
 import org.example.tca.service.CentralizedService;
+import org.example.tca.service.ConditionService;
 import org.example.tca.service.ModelService;
 import org.example.tca.service.RuleService;
 import org.example.tca.service.ThresholdService;
+import org.example.tca.vo.AlarmVO;
+import org.example.tca.vo.ConditionVO;
 import org.example.tca.vo.ModelVO;
 import org.example.tca.vo.RuleVO;
 import org.example.tca.vo.ThresholdVO;
@@ -17,11 +23,17 @@ public class CentralizedServiceImpl implements CentralizedService {
     private ModelService m_modelService;
     private ThresholdService m_thresholdService;
     private RuleService m_ruleService;
+    private ConditionService m_conditionService;
+    private AlarmService m_alarmService;
 
-    public CentralizedServiceImpl(ModelService modelService, ThresholdService thresholdService, RuleService ruleService) {
+    public CentralizedServiceImpl(ModelService modelService, ThresholdService thresholdService,
+                                  RuleService ruleService, ConditionService conditionService,
+                                  AlarmService alarmService) {
         this.m_modelService = modelService;
         this.m_thresholdService = thresholdService;
         this.m_ruleService = ruleService;
+        this.m_conditionService = conditionService;
+        this.m_alarmService = alarmService;
     }
 
     @Override
@@ -95,7 +107,7 @@ public class CentralizedServiceImpl implements CentralizedService {
     }
 
     @Override
-    public RuleVO getRule(String name, String family, String objectType, String tcaLabel, long id)
+    public RuleVO getRule(String name, String family, String objectType, String tcaLabel, Long id)
             throws ModelException, ThresholdException, RuleException {
         return m_ruleService.getRule(name, family, objectType, tcaLabel, id);
     }
@@ -107,13 +119,13 @@ public class CentralizedServiceImpl implements CentralizedService {
     }
 
     @Override
-    public void updateRule(String name, String family, String objectType, String tcaLabel, long id, RuleVO ruleVO)
+    public void updateRule(String name, String family, String objectType, String tcaLabel, Long id, RuleVO ruleVO)
             throws ModelException, ThresholdException, RuleException {
         m_ruleService.updateRule(name, family, objectType, tcaLabel, id, ruleVO);
     }
 
     @Override
-    public void deleteRule(String name, String family, String objectType, String tcaLabel, long id)
+    public void deleteRule(String name, String family, String objectType, String tcaLabel, Long id)
             throws ModelException, ThresholdException, RuleException {
         m_ruleService.deleteRule(name, family, objectType, tcaLabel, id);
     }
@@ -122,5 +134,61 @@ public class CentralizedServiceImpl implements CentralizedService {
     public void deleteAllRule(String name, String family, String objectType, String tcaLabel)
             throws ModelException, ThresholdException, RuleException {
         m_ruleService.deleteAllRule(name, family, objectType, tcaLabel);
+    }
+
+    @Override
+    public List<ConditionVO> getConditions(String name, String family, String objectType, String tcaLabel, Long id)
+            throws ModelException, ThresholdException, RuleException {
+        return m_conditionService.getConditions(name, family, objectType, tcaLabel, id);
+    }
+
+    @Override
+    public ConditionVO getCondition(String name, String family, String objectType, String tcaLabel, Long id, String attributeName)
+            throws ModelException, ThresholdException, RuleException {
+        return m_conditionService.getCondition(name, family, objectType, tcaLabel, id, attributeName);
+    }
+
+    @Override
+    public void addCondition(String name, String family, String objectType, String tcaLabel, Long id, ConditionVO conditionVO)
+            throws ModelException, ThresholdException, RuleException, ConditionExeption {
+        m_conditionService.addCondition(name, family, objectType, tcaLabel, id, conditionVO);
+    }
+
+    @Override
+    public void updateCondition(String name, String family, String objectType, String tcaLabel, Long id, String attributeName, ConditionVO conditionVO)
+            throws ModelException, ThresholdException, RuleException, ConditionExeption {
+        m_conditionService.updateCondition(name, family, objectType, tcaLabel, id, attributeName, conditionVO);
+    }
+
+    @Override
+    public void deleteCondition(String name, String family, String objectType, String tcaLabel, Long id, String attributeName)
+            throws ModelException, ThresholdException, RuleException, ConditionExeption {
+        m_conditionService.deleteCondition(name, family, objectType, tcaLabel, id, attributeName);
+    }
+
+    @Override
+    public void deleteAllCondition(String name, String family, String objectType, String tcaLabel, Long id)
+            throws ModelException, ThresholdException, RuleException, ConditionExeption {
+        m_conditionService.deleteAllCondition(name, family, objectType, tcaLabel, id);
+    }
+
+    @Override
+    public AlarmVO getAlarm(String name, String family, String objectType, String tcaLabel, Long idRule, Long idAlarm) throws ModelException, ThresholdException, RuleException, AlarmException {
+        return m_alarmService.getAlarm(name, family, objectType, tcaLabel, idRule, idAlarm);
+    }
+
+    @Override
+    public void addAlarm(String name, String family, String objectType, String tcaLabel, Long idRule, AlarmVO alarmVO) throws ModelException, ThresholdException, RuleException, AlarmException {
+        m_alarmService.addAlarm(name, family, objectType, tcaLabel, idRule, alarmVO);
+    }
+
+    @Override
+    public void updateAlarm(String name, String family, String objectType, String tcaLabel, Long idRule, Long idAlarm, AlarmVO alarmVO) throws ModelException, ThresholdException, RuleException, AlarmException {
+        m_alarmService.updateAlarm(name, family, objectType, tcaLabel, idRule, idAlarm, alarmVO);
+    }
+
+    @Override
+    public void deleteAlarm(String name, String family, String objectType, String tcaLabel, Long idRule, Long idAlarm) throws ModelException, ThresholdException, RuleException, AlarmException {
+        m_alarmService.deleteAlarm(name, family, objectType, tcaLabel, idRule, idAlarm);
     }
 }

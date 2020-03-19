@@ -20,7 +20,7 @@ public enum ConditionLogicalOperator {
         return value;
     }
 
-    public ConditionLogicalOperator from(String key) {
+    public static ConditionLogicalOperator from(String key) {
         switch (key) {
             case "and":
                 return ConditionLogicalOperator.and;

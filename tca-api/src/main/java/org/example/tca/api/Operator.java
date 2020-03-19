@@ -24,7 +24,7 @@ public enum Operator {
         return value;
     }
 
-    public Operator from(String key) {
+    public static Operator from(String key) {
         switch (key) {
             case "eq":
                 return Operator.eq;

@@ -111,9 +111,10 @@ public class ModelVO {
                 ", version='" + version + '\'' +
                 ", description='" + description + '\'' +
                 ", build='" + build + '\'' +
-                ", date=" + date +
+                ", date='" + date + '\'' +
                 ", author='" + author + '\'' +
-                ", activationTime=" + activationTime +
+                ", activationTime='" + activationTime + '\'' +
+                ", noOfTCAs=" + noOfTCAs +
                 '}';
     }
 }

@@ -1,14 +1,34 @@
 package org.example.tca.util;
 
+import org.example.tca.api.Aggregator;
+import org.example.tca.api.ConditionLogicalOperator;
 import org.example.tca.api.Rule;
+import org.example.tca.exception.RuleException;
 import org.example.tca.vo.RuleVO;
 
 public class RuleUtil {
-    public static Rule parseRuleVOToEntity(RuleVO ruleVO) throws Exception {
+
+    public static Rule parseRuleVOToEntity(RuleVO ruleVO) throws RuleException {
         if (ruleVO == null) {
-            throw new Exception("Invalid rule info");
+            throw new RuleException("Invalid rule info");
         }
 
-        return new Rule(ruleVO.getConditionLogicalOperator(), ruleVO.getAggregation(), ruleVO.getAggregationPeriod());
+        ConditionLogicalOperator conditionLogicalOperator = null;
+        if (ruleVO.getConditionLogicalOperator() != null) {
+            conditionLogicalOperator = ConditionLogicalOperator.from(ruleVO.getConditionLogicalOperator());
+            if (conditionLogicalOperator == null) {
+                throw new RuleException ("Value " + ruleVO.getConditionLogicalOperator() + " is invalid ConditionLogicalOperator value");
+            }
+        }
+
+        Aggregator aggregator = null;
+        if (ruleVO.getAggregator() != null) {
+            aggregator = Aggregator.from(ruleVO.getAggregator());
+            if (aggregator == null) {
+                throw new RuleException ("Value " + ruleVO.getAggregator() + " is invalid Aggregator value");
+            }
+        }
+
+        return new Rule(conditionLogicalOperator, aggregator, ruleVO.getAggregationPeriod());
     }
 }

@@ -1,10 +1,13 @@
 package org.example.tca.api;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -14,7 +17,7 @@ public class Alarm {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @Column(name = "alarm_type_id", nullable = false, length = 128)
     private String alarmTypeId;
@@ -22,17 +25,23 @@ public class Alarm {
     @Column(name = "perceived_severity", nullable = false)
     private PerceivedSeverity perceivedSeverity;
 
-    @OneToOne(mappedBy="alarm")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "rule_id", nullable = false)
     private Rule rule;
 
     public Alarm() {
     }
 
-    public long getId() {
+    public Alarm(String alarmTypeId, PerceivedSeverity perceivedSeverity) {
+        this.alarmTypeId = alarmTypeId;
+        this.perceivedSeverity = perceivedSeverity;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

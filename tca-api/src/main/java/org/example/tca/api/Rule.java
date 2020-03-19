@@ -1,5 +1,7 @@
 package org.example.tca.api;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,28 +10,30 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity (name = "Rule")
 @Table (name = "tca_rule")
-public class Rule {
+public class Rule implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @Column(name = "condition_logical_operator")
     private ConditionLogicalOperator conditionLogicalOperator;
 
     @Column(name = "aggregator")
-    private Aggregation aggregator;
+    private Aggregator aggregator;
 
     @Column(name = "aggregation_period")
     private String aggregationPeriod;
@@ -41,24 +45,24 @@ public class Rule {
     @OneToMany(mappedBy = "rule", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Condition> conditions = new ArrayList<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "rule")
     private Alarm alarm;
 
     public Rule() {
     }
 
-    public Rule(ConditionLogicalOperator conditionLogicalOperator, Aggregation aggregator, String aggregationPeriod) {
-        this.conditionLogicalOperator = conditionLogicalOperator;
-        this.aggregator = aggregator;
-        this.aggregationPeriod = aggregationPeriod;
+    // Set default some fields if null
+    public Rule(ConditionLogicalOperator conditionLogicalOperator, Aggregator aggregator, String aggregationPeriod) {
+        this.conditionLogicalOperator = conditionLogicalOperator == null ? ConditionLogicalOperator.and : conditionLogicalOperator;
+        this.aggregator = aggregator == null ? Aggregator.avg : aggregator;
+        this.aggregationPeriod = aggregationPeriod == null ? "PT6H" : aggregationPeriod;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -70,11 +74,11 @@ public class Rule {
         this.conditionLogicalOperator = conditionLogicalOperator;
     }
 
-    public Aggregation getAggregator() {
+    public Aggregator getAggregator() {
         return aggregator;
     }
 
-    public void setAggregator(Aggregation aggregator) {
+    public void setAggregator(Aggregator aggregator) {
         this.aggregator = aggregator;
     }
 

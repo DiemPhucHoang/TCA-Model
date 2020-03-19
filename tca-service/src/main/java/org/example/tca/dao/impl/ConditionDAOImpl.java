@@ -7,6 +7,7 @@ import org.example.tca.dao.ConditionDAO;
 import org.example.tca.exception.ConditionExeption;
 import org.example.tca.exception.RuleException;
 import org.example.tca.exception.ThresholdException;
+import org.example.tca.persistence.PersistenceUtil;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -19,8 +20,8 @@ public class ConditionDAOImpl implements ConditionDAO {
 
     private EntityManager m_entityManager;
 
-    public ConditionDAOImpl(EntityManager m_entityManager) {
-        this.m_entityManager = m_entityManager;
+    public ConditionDAOImpl(PersistenceUtil persistenceUtil) {
+        this.m_entityManager = persistenceUtil.getEntityManager();
     }
 
     @Override

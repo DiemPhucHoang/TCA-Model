@@ -1,34 +1,35 @@
 package org.example.tca.vo;
 
-import org.example.tca.api.Aggregation;
-import org.example.tca.api.ConditionLogicalOperator;
 import org.example.tca.api.Rule;
 
 public class RuleVO {
-    private ConditionLogicalOperator conditionLogicalOperator;
-    private Aggregation aggregation;
+    private String conditionLogicalOperator;
+    private String aggregator;
     private String aggregationPeriod;
 
+    public RuleVO() {
+    }
+
     public RuleVO(Rule rule) {
-        this.conditionLogicalOperator = rule.getConditionLogicalOperator();
-        this.aggregation = rule.getAggregator();
+        this.conditionLogicalOperator = rule.getConditionLogicalOperator().getKey();
+        this.aggregator = rule.getAggregator().getKey();
         this.aggregationPeriod = rule.getAggregationPeriod();
     }
 
-    public ConditionLogicalOperator getConditionLogicalOperator() {
+    public String getConditionLogicalOperator() {
         return conditionLogicalOperator;
     }
 
-    public void setConditionLogicalOperator(ConditionLogicalOperator conditionLogicalOperator) {
+    public void setConditionLogicalOperator(String conditionLogicalOperator) {
         this.conditionLogicalOperator = conditionLogicalOperator;
     }
 
-    public Aggregation getAggregation() {
-        return aggregation;
+    public String getAggregator() {
+        return aggregator;
     }
 
-    public void setAggregation(Aggregation aggregation) {
-        this.aggregation = aggregation;
+    public void setAggregator(String aggregator) {
+        this.aggregator = aggregator;
     }
 
     public String getAggregationPeriod() {
@@ -42,8 +43,8 @@ public class RuleVO {
     @Override
     public String toString() {
         return "RuleVO{" +
-                "conditionLogicalOperator=" + conditionLogicalOperator +
-                ", aggregation=" + aggregation +
+                "conditionLogicalOperator='" + conditionLogicalOperator + '\'' +
+                ", aggregator='" + aggregator + '\'' +
                 ", aggregationPeriod='" + aggregationPeriod + '\'' +
                 '}';
     }

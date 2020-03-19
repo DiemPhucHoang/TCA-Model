@@ -23,7 +23,7 @@ public enum PerceivedSeverity {
         return value;
     }
 
-    public PerceivedSeverity from(String key) {
+    public static PerceivedSeverity from(String key) {
         switch (key) {
             case "indeterminate":
                 return PerceivedSeverity.indeterminate;

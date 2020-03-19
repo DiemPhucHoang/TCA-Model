@@ -10,6 +10,8 @@ public class ThresholdVO {
 
     private String description;
 
+    private int noOfRules;
+
     public ThresholdVO() {
     }
 
@@ -17,6 +19,7 @@ public class ThresholdVO {
         this.objectType = threshold.getObjectType();
         this.tcaLabel = threshold.getTcaLabel();
         this.description = threshold.getDescription();
+        this.noOfRules = threshold.getRules() == null ? 0 : threshold.getRules().size();
     }
 
     public String getObjectType() {
@@ -43,4 +46,21 @@ public class ThresholdVO {
         this.description = description;
     }
 
+    public int getNoOfRules() {
+        return noOfRules;
+    }
+
+    public void setNoOfRules(int noOfRules) {
+        this.noOfRules = noOfRules;
+    }
+
+    @Override
+    public String toString() {
+        return "ThresholdVO{" +
+                "objectType='" + objectType + '\'' +
+                ", tcaLabel='" + tcaLabel + '\'' +
+                ", description='" + description + '\'' +
+                ", noOfRules=" + noOfRules +
+                '}';
+    }
 }

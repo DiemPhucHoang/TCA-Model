@@ -106,8 +106,11 @@ public class ModelDAOImpl implements ModelDAO {
     @Override
     @Transactional(Transactional.TxType.REQUIRES_NEW)
     public void deleteAll() throws ModelException {
-        Query query = m_entityManager.createQuery("DELETE FROM Model");
-        query.executeUpdate();
-
+        try {
+            Query query = m_entityManager.createQuery("DELETE Model");
+            query.executeUpdate();
+        } catch (Exception e) {
+            throw new ModelException(e.getMessage());
+        }
     }
 }

@@ -1,9 +1,13 @@
 package org.example.tca.rest.impl;
 
+import org.example.tca.rest.AlarmRest;
 import org.example.tca.rest.CentralizedRest;
+import org.example.tca.rest.ConditionRest;
 import org.example.tca.rest.ModelRest;
 import org.example.tca.rest.RuleRest;
 import org.example.tca.rest.ThresholdRest;
+import org.example.tca.vo.AlarmVO;
+import org.example.tca.vo.ConditionVO;
 import org.example.tca.vo.ModelVO;
 import org.example.tca.vo.RuleVO;
 import org.example.tca.vo.ThresholdVO;
@@ -16,11 +20,16 @@ public class CentralizedRestImpl implements CentralizedRest {
     private ModelRest m_modelRest;
     private ThresholdRest m_thresholdRest;
     private RuleRest m_ruleRest;
+    private ConditionRest m_conditionRest;
+    private AlarmRest m_alarmRest;
 
-    public CentralizedRestImpl(ModelRest tcaRest, ThresholdRest thresholdRest, RuleRest ruleRest) {
+    public CentralizedRestImpl(ModelRest tcaRest, ThresholdRest thresholdRest,
+                               RuleRest ruleRest, ConditionRest conditionRest, AlarmRest alarmRest) {
         this.m_modelRest = tcaRest;
         this.m_thresholdRest = thresholdRest;
         this.m_ruleRest = ruleRest;
+        this.m_conditionRest = conditionRest;
+        this.m_alarmRest = alarmRest;
     }
 
     @Override
@@ -111,5 +120,55 @@ public class CentralizedRestImpl implements CentralizedRest {
     @Override
     public Response deleteAllRule(String name, String family, String objectType, String tcaLable) {
         return m_ruleRest.deleteAllRule(name, family, objectType, tcaLable);
+    }
+
+    @Override
+    public Response listCondition(String name, String family, String objectType, String tcaLable, Long id) {
+        return m_conditionRest.listCondition(name, family, objectType, tcaLable, id);
+    }
+
+    @Override
+    public Response getCondition(String name, String family, String objectType, String tcaLable, Long id, String attributeName) {
+        return m_conditionRest.getCondition(name, family, objectType, tcaLable, id, attributeName);
+    }
+
+    @Override
+    public Response addCondition(String name, String family, String objectType, String tcaLable, Long id, ConditionVO conditionVO) {
+        return m_conditionRest.addCondition(name, family, objectType, tcaLable, id, conditionVO);
+    }
+
+    @Override
+    public Response updateCondition(String name, String family, String objectType, String tcaLable, Long id, String attributeName, ConditionVO conditionVO) {
+        return m_conditionRest.updateCondition(name, family, objectType, tcaLable, id, attributeName, conditionVO);
+    }
+
+    @Override
+    public Response deleteCondition(String name, String family, String objectType, String tcaLable, Long id, String attributeName) {
+        return m_conditionRest.deleteCondition(name, family, objectType, tcaLable, id, attributeName);
+    }
+
+    @Override
+    public Response deleteAllCondition(String name, String family, String objectType, String tcaLable, Long id) {
+        return m_conditionRest.deleteAllCondition(name, family, objectType, tcaLable, id);
+    }
+
+    @Override
+    public Response getAlarm(String name, String family, String objectType, String tcaLable, Long idRule, Long idAlarm) {
+        return m_alarmRest.getAlarm(name, family, objectType, tcaLable, idRule, idAlarm);
+    }
+
+    @Override
+    public Response addAlarm(String name, String family, String objectType, String tcaLable, Long idRule, AlarmVO alarmVO) {
+        return m_alarmRest.addAlarm(name, family, objectType, tcaLable, idRule, alarmVO);
+    }
+
+    @Override
+    public Response updateAlarm(String name, String family, String objectType, String tcaLable, Long idRule, Long idAlarm, AlarmVO alarmVO) {
+        return m_alarmRest.updateAlarm(name, family, objectType, tcaLable, idRule, idAlarm, alarmVO);
+    }
+
+    @Override
+    public Response deleteAlarm(String name, String family, String objectType, String tcaLable, Long idRule, Long idAlarm) {
+        return m_alarmRest.deleteAlarm(name, family, objectType, tcaLable, idRule, idAlarm);
     }
 }

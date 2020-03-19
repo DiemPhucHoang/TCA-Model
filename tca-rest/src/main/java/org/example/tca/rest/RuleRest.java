@@ -24,7 +24,8 @@ public interface RuleRest {
     @Produces("application/json")
     @GET
     Response getRule(@PathParam("name") String name, @PathParam("family") String family,
-                     @PathParam("objectType") String objectType, @PathParam("tcaLable") String tcaLable, @PathParam("id") Long id);
+                     @PathParam("objectType") String objectType, @PathParam("tcaLable") String tcaLable,
+                     @PathParam("id") Long id);
 
     @Path("/{name}/{family}/thresholds/{objectType}/{tcaLable}/rules")
     @Consumes("application/json")
@@ -37,14 +38,16 @@ public interface RuleRest {
     @Consumes("application/json")
     @Produces("application/json")
     @PUT
-    Response updateRule(@PathParam("name") String name, @PathParam("family") String family, @PathParam("objectType") String objectType,
-                        @PathParam("tcaLable") String tcaLable, @PathParam("id") Long id, RuleVO ruleVO);
+    Response updateRule(@PathParam("name") String name, @PathParam("family") String family,
+                        @PathParam("objectType") String objectType, @PathParam("tcaLable") String tcaLable,
+                        @PathParam("id") Long id, RuleVO ruleVO);
 
     @Path("/{name}/{family}/thresholds/{objectType}/{tcaLable}/rules/{id}")
     @Produces("application/json")
     @DELETE
     Response deleteRule(@PathParam("name") String name, @PathParam("family") String family,
-                        @PathParam("objectType") String objectType, @PathParam("tcaLable") String tcaLable, @PathParam("id") Long id);
+                        @PathParam("objectType") String objectType, @PathParam("tcaLable") String tcaLable,
+                        @PathParam("id") Long id);
 
     @Path("/{name}/{family}/thresholds/{objectType}/{tcaLable}/rules")
     @Produces("application/json")
