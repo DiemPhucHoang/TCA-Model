@@ -13,7 +13,7 @@ import org.example.tca.exception.ModelException;
 import org.example.tca.exception.RuleException;
 import org.example.tca.exception.ThresholdException;
 import org.example.tca.service.AlarmService;
-import org.example.tca.util.AlarmUtil;
+import org.example.tca.parsing.AlarmParsing;
 import org.example.tca.vo.AlarmVO;
 
 public class AlarmServiceImpl implements AlarmService {
@@ -45,7 +45,7 @@ public class AlarmServiceImpl implements AlarmService {
             throw new RuleException("Rule with ID '" + idRule + "' has a alarm");
         }
         try {
-            m_alarmDAO.add(ruleDB, AlarmUtil.parseAlarmVOToEntity(alarmVO));
+            m_alarmDAO.add(ruleDB, AlarmParsing.parseAlarmVOToEntity(alarmVO));
         } catch(Exception e) {
             throw new AlarmException(e.getMessage());
         }
@@ -56,7 +56,7 @@ public class AlarmServiceImpl implements AlarmService {
             throws ModelException, ThresholdException, RuleException, AlarmException {
         Rule ruleDB = getRuleDB(name, family, objectType, tcaLabel, idRule);
         try {
-            m_alarmDAO.update(ruleDB, idAlarm, AlarmUtil.parseAlarmVOToEntity(alarmVO));
+            m_alarmDAO.update(ruleDB, idAlarm, AlarmParsing.parseAlarmVOToEntity(alarmVO));
         } catch (Exception e) {
             throw new AlarmException(e.getMessage());
         }

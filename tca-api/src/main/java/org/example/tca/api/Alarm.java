@@ -1,6 +1,5 @@
 package org.example.tca.api;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -36,6 +35,13 @@ public class Alarm {
         this.alarmTypeId = alarmTypeId;
         this.perceivedSeverity = perceivedSeverity;
     }
+
+    public Alarm(String alarmTypeId, PerceivedSeverity perceivedSeverity, Rule rule) {
+        this.alarmTypeId = alarmTypeId;
+        this.perceivedSeverity = perceivedSeverity;
+        this.rule = rule;
+    }
+
 
     public Long getId() {
         return id;

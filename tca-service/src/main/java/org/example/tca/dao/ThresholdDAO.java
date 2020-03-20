@@ -14,8 +14,6 @@ public interface ThresholdDAO {
 
     long add(Model model, Threshold threshold) throws ThresholdException;
 
-    void update(Model model, String objectType, String tcaLabel, Threshold threshold) throws ThresholdException;
-
     void delete(Model model, String objectType, String tcaLabel) throws ThresholdException;
 
     void deleteAll(Model model) throws ThresholdException;

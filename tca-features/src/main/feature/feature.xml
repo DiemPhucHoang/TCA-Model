@@ -35,6 +35,7 @@
         <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-databind/${jackson.version}</bundle>
         <bundle dependency="true">mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-base/${jackson.version}</bundle>
         <bundle dependency="true">mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-json-provider/${jackson.version}</bundle>
+        <bundle dependency="true">mvn:com.sun.activation/javax.activation/${javax.activation.version}</bundle>
         <feature version="${project.version}">tca-service</feature>
         <bundle>mvn:org.example.tca/tca-rest/${project.version}</bundle>
     </feature>

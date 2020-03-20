@@ -2,10 +2,15 @@ package org.example.tca.vo;
 
 import org.example.tca.api.Rule;
 
+import java.util.List;
+
 public class RuleVO {
     private String conditionLogicalOperator;
     private String aggregator;
     private String aggregationPeriod;
+    private List<ConditionVO> conditions;
+    private int noOfConditions;
+    private AlarmVO alarm;
 
     public RuleVO() {
     }
@@ -38,6 +43,30 @@ public class RuleVO {
 
     public void setAggregationPeriod(String aggregationPeriod) {
         this.aggregationPeriod = aggregationPeriod;
+    }
+
+    public List<ConditionVO> getConditions() {
+        return conditions;
+    }
+
+    public void setConditions(List<ConditionVO> conditions) {
+        this.conditions = conditions;
+    }
+
+    public int getNoOfConditions() {
+        return noOfConditions;
+    }
+
+    public void setNoOfConditions(int noOfConditions) {
+        this.noOfConditions = noOfConditions;
+    }
+
+    public AlarmVO getAlarm() {
+        return alarm;
+    }
+
+    public void setAlarm(AlarmVO alarm) {
+        this.alarm = alarm;
     }
 
     @Override

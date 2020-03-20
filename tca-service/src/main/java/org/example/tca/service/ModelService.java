@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface ModelService {
 
+    void importModel(String json, String fileName) throws Exception;
+
     List<ModelVO> getModels();
 
     ModelVO getModel(String name, String family);

@@ -1,11 +1,12 @@
-package org.example.tca.util;
+package org.example.tca.parsing;
 
 import org.example.tca.api.Condition;
 import org.example.tca.api.Operator;
 import org.example.tca.exception.RuleException;
 import org.example.tca.vo.ConditionVO;
 
-public class ConditionUtil {
+public class ConditionParsing {
+
     public static Condition parseConditionVOToEntity(ConditionVO conditionVO) throws Exception {
         if (conditionVO == null) {
             throw new Exception("Invalid condition info");
@@ -23,12 +24,12 @@ public class ConditionUtil {
         if (conditionVO.getClearOperator() != null) {
             clearOperator = Operator.from(conditionVO.getClearOperator());
             if (clearOperator == null) {
-                throw new RuleException("Value " + conditionVO.getClearOperator() + " is invalid clearOperator value");
+                throw new RuleException("Value " + conditionVO.getClearOperator() + " is invalid ClearOperator value");
             }
         }
 
         return new Condition(conditionVO.getAttributeName(), conditionVO.getAttributeGuiName(), conditionVO.getObjectType(), operator,
-                conditionVO.getValue(), clearOperator, conditionVO.getClearValue(),
-                conditionVO.getRate());
+                conditionVO.getDefaultValue(), clearOperator, conditionVO.getClearDefaultValue(),
+                conditionVO.getRate(), conditionVO.getCounterMax());
     }
 }

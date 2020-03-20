@@ -1,13 +1,9 @@
-package org.example.tca.rest;
-
-import org.example.tca.response.Level;
-import org.example.tca.response.Status;
-import org.example.tca.response.TCAResponse;
+package org.example.tca.response;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-public class TCARestUtil {
+public class TCAResponseUtil {
 
     public static Response printPassResponse(String message) {
         return Response

@@ -1,7 +1,7 @@
 package org.example.tca.rest.impl;
 
 import org.example.tca.rest.AlarmRest;
-import org.example.tca.rest.TCARestUtil;
+import org.example.tca.response.TCAResponseUtil;
 import org.example.tca.service.CentralizedService;
 import org.example.tca.vo.AlarmVO;
 
@@ -16,44 +16,44 @@ public class AlarmRestImpl implements AlarmRest {
     }
 
     @Override
-    public Response getAlarm(String name, String family, String objectType, String tcaLable, Long idRule, Long idAlarm) {
+    public Response getAlarm(String name, String family, String objectType, String tcaLabel, Long idRule, Long idAlarm) {
         try {
             return Response
                     .ok()
-                    .entity(m_service.getAlarm(name, family, objectType, tcaLable, idRule, idAlarm))
+                    .entity(m_service.getAlarm(name, family, objectType, tcaLabel, idRule, idAlarm))
                     .build();
         } catch (Exception e) {
-            return TCARestUtil.printFailResponse("Get alarm for " + TCARestUtil.printPath(name, family, objectType, tcaLable, idRule, idAlarm) + " failed", e);
+            return TCAResponseUtil.printFailResponse("Get alarm for " + TCAResponseUtil.printPath(name, family, objectType, tcaLabel, idRule, idAlarm) + " failed", e);
         }
     }
 
     @Override
-    public Response addAlarm(String name, String family, String objectType, String tcaLable, Long idRule, AlarmVO alarmVO) {
+    public Response addAlarm(String name, String family, String objectType, String tcaLabel, Long idRule, AlarmVO alarmVO) {
         try {
-            m_service.addAlarm(name, family, objectType, tcaLable, idRule, alarmVO);
-            return TCARestUtil.printPassResponse("Added alarm for " + TCARestUtil.printPath(name, family, objectType, tcaLable, idRule) + " successfully");
+            m_service.addAlarm(name, family, objectType, tcaLabel, idRule, alarmVO);
+            return TCAResponseUtil.printPassResponse("Added alarm for " + TCAResponseUtil.printPath(name, family, objectType, tcaLabel, idRule) + " successfully");
         } catch (Exception e) {
-            return TCARestUtil.printFailResponse("Added alarm for " + TCARestUtil.printPath(name, family, objectType, tcaLable, idRule) + " failed", e);
+            return TCAResponseUtil.printFailResponse("Added alarm for " + TCAResponseUtil.printPath(name, family, objectType, tcaLabel, idRule) + " failed", e);
         }
     }
 
     @Override
-    public Response updateAlarm(String name, String family, String objectType, String tcaLable, Long idRule, Long idAlarm, AlarmVO alarmVO) {
+    public Response updateAlarm(String name, String family, String objectType, String tcaLabel, Long idRule, Long idAlarm, AlarmVO alarmVO) {
         try {
-            m_service.updateAlarm(name, family, objectType, tcaLable, idRule, idAlarm, alarmVO);
-            return TCARestUtil.printPassResponse("Updated alarm for " + TCARestUtil.printPath(name, family, objectType, tcaLable, idRule) + " successfully");
+            m_service.updateAlarm(name, family, objectType, tcaLabel, idRule, idAlarm, alarmVO);
+            return TCAResponseUtil.printPassResponse("Updated alarm for " + TCAResponseUtil.printPath(name, family, objectType, tcaLabel, idRule) + " successfully");
         } catch (Exception e) {
-            return TCARestUtil.printFailResponse("Updated alarm for " + TCARestUtil.printPath(name, family, objectType, tcaLable, idRule) + " failed", e);
+            return TCAResponseUtil.printFailResponse("Updated alarm for " + TCAResponseUtil.printPath(name, family, objectType, tcaLabel, idRule) + " failed", e);
         }
     }
 
     @Override
-    public Response deleteAlarm(String name, String family, String objectType, String tcaLable, Long idRule, Long idAlarm) {
+    public Response deleteAlarm(String name, String family, String objectType, String tcaLabel, Long idRule, Long idAlarm) {
         try {
-            m_service.deleteAlarm(name, family, objectType, tcaLable, idRule, idAlarm);
-            return TCARestUtil.printPassResponse("Deleted alarm for " + TCARestUtil.printPath(name, family, objectType, tcaLable, idRule, idAlarm) + " successfully");
+            m_service.deleteAlarm(name, family, objectType, tcaLabel, idRule, idAlarm);
+            return TCAResponseUtil.printPassResponse("Deleted alarm for " + TCAResponseUtil.printPath(name, family, objectType, tcaLabel, idRule, idAlarm) + " successfully");
         } catch (Exception e) {
-            return TCARestUtil.printFailResponse("Deleted alarm for " + TCARestUtil.printPath(name, family, objectType, tcaLable, idRule, idAlarm) + " failed", e);
+            return TCAResponseUtil.printFailResponse("Deleted alarm for " + TCAResponseUtil.printPath(name, family, objectType, tcaLabel, idRule, idAlarm) + " failed", e);
         }
     }
 }

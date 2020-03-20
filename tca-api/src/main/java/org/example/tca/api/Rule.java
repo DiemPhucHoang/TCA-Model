@@ -1,7 +1,5 @@
 package org.example.tca.api;
 
-import org.hibernate.annotations.ColumnDefault;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,11 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -51,7 +47,6 @@ public class Rule implements Serializable {
     public Rule() {
     }
 
-    // Set default some fields if null
     public Rule(ConditionLogicalOperator conditionLogicalOperator, Aggregator aggregator, String aggregationPeriod) {
         this.conditionLogicalOperator = conditionLogicalOperator == null ? ConditionLogicalOperator.and : conditionLogicalOperator;
         this.aggregator = aggregator == null ? Aggregator.avg : aggregator;

@@ -2,15 +2,14 @@ package org.example.tca.vo;
 
 import org.example.tca.api.Threshold;
 
+import java.util.List;
+
 public class ThresholdVO {
 
     private String objectType;
-
     private String tcaLabel;
-
-    private String description;
-
     private int noOfRules;
+    private List<RuleVO> rules;
 
     public ThresholdVO() {
     }
@@ -18,7 +17,6 @@ public class ThresholdVO {
     public ThresholdVO(Threshold threshold) {
         this.objectType = threshold.getObjectType();
         this.tcaLabel = threshold.getTcaLabel();
-        this.description = threshold.getDescription();
         this.noOfRules = threshold.getRules() == null ? 0 : threshold.getRules().size();
     }
 
@@ -38,14 +36,6 @@ public class ThresholdVO {
         this.tcaLabel = tcaLabel;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public int getNoOfRules() {
         return noOfRules;
     }
@@ -54,12 +44,19 @@ public class ThresholdVO {
         this.noOfRules = noOfRules;
     }
 
+    public List<RuleVO> getRules() {
+        return rules;
+    }
+
+    public void setRules(List<RuleVO> rules) {
+        this.rules = rules;
+    }
+
     @Override
     public String toString() {
         return "ThresholdVO{" +
                 "objectType='" + objectType + '\'' +
                 ", tcaLabel='" + tcaLabel + '\'' +
-                ", description='" + description + '\'' +
                 ", noOfRules=" + noOfRules +
                 '}';
     }

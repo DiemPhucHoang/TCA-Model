@@ -1,7 +1,5 @@
 package org.example.tca.api;
 
-import org.hibernate.annotations.ColumnDefault;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -47,7 +45,6 @@ public class Condition implements Serializable {
     private Boolean rate;
 
     @Column(name = "counter_max")
-    @ColumnDefault("18446744073709551615")
     private Double counterMax;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -58,7 +55,7 @@ public class Condition implements Serializable {
     }
 
     public Condition(String attributeName, String attributeGuiName, String objectType, Operator operator,
-                     Long value, Operator clearOperator, Long clearValue, Boolean rate) {
+                     Long value, Operator clearOperator, Long clearValue, Boolean rate, Double counterMax) {
         this.attributeName = attributeName;
         this.attributeGuiName = attributeGuiName;
         this.objectType = objectType;
@@ -67,6 +64,21 @@ public class Condition implements Serializable {
         this.clearOperator = clearOperator;
         this.clearValue = clearValue;
         this.rate = rate == null ? false : rate;
+        this.counterMax = counterMax == null ? Double.valueOf("18446744073709551615") : counterMax;
+    }
+
+    public Condition(String attributeName, String attributeGuiName, String objectType, Operator operator, Long value,
+                     Operator clearOperator, Long clearValue, Boolean rate, Double counterMax, Rule rule) {
+        this.attributeName = attributeName;
+        this.attributeGuiName = attributeGuiName;
+        this.objectType = objectType;
+        this.operator = operator;
+        this.value = value;
+        this.clearOperator = clearOperator;
+        this.clearValue = clearValue;
+        this.rate = rate == null ? false : rate;
+        this.counterMax = counterMax == null ? Double.valueOf("18446744073709551615") : counterMax;
+        this.rule = rule;
     }
 
     public Long getId() {

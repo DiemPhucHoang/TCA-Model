@@ -37,6 +37,11 @@ public class CentralizedServiceImpl implements CentralizedService {
     }
 
     @Override
+    public void importModel(String json, String fileName) throws Exception {
+        m_modelService.importModel(json, fileName);
+    }
+
+    @Override
     public List<ModelVO> getModels() {
         return m_modelService.getModels();
     }
@@ -81,12 +86,6 @@ public class CentralizedServiceImpl implements CentralizedService {
     public void addThreshold(String name, String family, ThresholdVO thresholdVO)
             throws ModelException, ThresholdException {
         m_thresholdService.addThreshold(name, family, thresholdVO);
-    }
-
-    @Override
-    public void updateThreshold(String name, String family, String objectType, String tcaLabel, ThresholdVO thresholdVO)
-            throws ModelException, ThresholdException {
-        m_thresholdService.updateThreshold(name, family, objectType, tcaLabel, thresholdVO);
     }
 
     @Override

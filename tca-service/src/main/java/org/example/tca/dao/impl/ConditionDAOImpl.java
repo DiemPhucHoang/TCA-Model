@@ -2,11 +2,8 @@ package org.example.tca.dao.impl;
 
 import org.example.tca.api.Condition;
 import org.example.tca.api.Rule;
-import org.example.tca.api.Threshold;
 import org.example.tca.dao.ConditionDAO;
 import org.example.tca.exception.ConditionExeption;
-import org.example.tca.exception.RuleException;
-import org.example.tca.exception.ThresholdException;
 import org.example.tca.persistence.PersistenceUtil;
 
 import javax.persistence.EntityManager;
@@ -59,7 +56,7 @@ public class ConditionDAOImpl implements ConditionDAO {
             if (id instanceof Long) {
                 return (long) id;
             } else {
-                throw new ThresholdException("Could not get condition id");
+                throw new ConditionExeption("Could not get condition id");
             }
         } catch (Exception e) {
             throw new ConditionExeption(e.getMessage());
@@ -82,7 +79,7 @@ public class ConditionDAOImpl implements ConditionDAO {
     }
     private void updateConditionExits(Condition conditionDB, Condition condition, Rule rule, String attributeName) {
         if (condition == null) {
-            throw new ConditionExeption("Invaild condition info");
+            throw new ConditionExeption("Invalid condition info");
         }
         if (!attributeName.equals(condition.getAttributeName())) {
             throw new ConditionExeption("Condition with attributeName are not allowed to edit");

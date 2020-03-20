@@ -1,16 +1,17 @@
 package org.example.tca.rest.impl;
 
+import org.apache.cxf.jaxrs.ext.multipart.Attachment;
 import org.example.tca.rest.ModelRest;
-import org.example.tca.rest.TCARestUtil;
+import org.example.tca.response.TCAResponseUtil;
 import org.example.tca.service.CentralizedService;
 import org.example.tca.vo.ModelVO;
 
 import javax.ws.rs.core.Response;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Collection;
-
-import static org.example.tca.rest.TCARestUtil.printFailResponse;
-import static org.example.tca.rest.TCARestUtil.printPassResponse;
-
+import java.util.stream.Collectors;
 
 public class ModelRestImpl implements ModelRest {
 
@@ -18,6 +19,20 @@ public class ModelRestImpl implements ModelRest {
 
     public ModelRestImpl(CentralizedService service) {
         m_service = service;
+    }
+
+    @Override
+    public Response importModel(Attachment attachment) {
+        try {
+            InputStream inputStream = attachment.getDataHandler().getInputStream();
+            String fileName = attachment.getDataHandler().getName();
+            String jsonString = new BufferedReader(new InputStreamReader(inputStream)).lines()
+                    .parallel().collect(Collectors.joining("\n"));
+            m_service.importModel(jsonString, fileName);
+            return TCAResponseUtil.printPassResponse("Imported model successfully");
+        } catch (Exception e) {
+            return TCAResponseUtil.printFailResponse("Import model failed", e);
+        }
     }
 
     @Override
@@ -31,22 +46,12 @@ public class ModelRestImpl implements ModelRest {
     }
 
     @Override
-    public Response addModel(ModelVO modelVO) {
-        try {
-            m_service.addModel(modelVO);
-            return TCARestUtil.printPassResponse("Added model for " + TCARestUtil.printPath(modelVO.getName(), modelVO.getFamily()) + " successfully");
-        } catch (Exception e) {
-            return TCARestUtil.printFailResponse("Added model for " + TCARestUtil.printPath(modelVO.getName(), modelVO.getFamily()) + " failed", e);
-        }
-    }
-
-    @Override
     public Response updateModel(String name, String family, ModelVO modelVO) {
         try {
             m_service.updateModel(name, family, modelVO);
-            return TCARestUtil.printPassResponse("Updated model for " + TCARestUtil.printPath(name, family) + " successfully");
+            return TCAResponseUtil.printPassResponse("Updated model for " + TCAResponseUtil.printPath(name, family) + " successfully");
         } catch (Exception e) {
-            return TCARestUtil.printFailResponse("Updated model for " + TCARestUtil.printPath(name, family) + " failed", e);
+            return TCAResponseUtil.printFailResponse("Update model for " + TCAResponseUtil.printPath(name, family) + " failed", e);
         }
     }
 
@@ -54,9 +59,9 @@ public class ModelRestImpl implements ModelRest {
     public Response deleteModel(String name, String family) {
         try {
             m_service.deleteModel(name, family);
-            return TCARestUtil.printPassResponse("Deleted model for " + TCARestUtil.printPath(name, family) + " successfully");
+            return TCAResponseUtil.printPassResponse("Deleted model for " + TCAResponseUtil.printPath(name, family) + " successfully");
         } catch (Exception e) {
-            return TCARestUtil.printFailResponse("Deleted model for " + TCARestUtil.printPath(name, family) + " failed", e);
+            return TCAResponseUtil.printFailResponse("Delete model for " + TCAResponseUtil.printPath(name, family) + " failed", e);
         }
     }
 
@@ -64,9 +69,9 @@ public class ModelRestImpl implements ModelRest {
     public Response deleteAllModel() {
         try {
             m_service.deleteAllModel();
-            return TCARestUtil.printPassResponse("Delete all model successfully");
+            return TCAResponseUtil.printPassResponse("Deleted all model successfully");
         } catch (Exception e) {
-            return TCARestUtil.printFailResponse("Delete all model fail", e);
+            return TCAResponseUtil.printFailResponse("Delete all model fail", e);
         }
     }
 }

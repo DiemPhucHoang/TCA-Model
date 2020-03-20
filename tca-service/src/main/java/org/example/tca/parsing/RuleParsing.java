@@ -1,4 +1,4 @@
-package org.example.tca.util;
+package org.example.tca.parsing;
 
 import org.example.tca.api.Aggregator;
 import org.example.tca.api.ConditionLogicalOperator;
@@ -6,7 +6,7 @@ import org.example.tca.api.Rule;
 import org.example.tca.exception.RuleException;
 import org.example.tca.vo.RuleVO;
 
-public class RuleUtil {
+public class RuleParsing {
 
     public static Rule parseRuleVOToEntity(RuleVO ruleVO) throws RuleException {
         if (ruleVO == null) {

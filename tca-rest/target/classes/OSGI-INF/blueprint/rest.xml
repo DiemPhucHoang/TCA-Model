@@ -15,29 +15,24 @@
         </cxf:features>
     </cxf:bus>
 
-<!--    <jaxrs:server id="tcaRest" address="/api/tca">-->
-<!--        <jaxrs:serviceBeans>-->
-<!--            <ref component-id="tcaBean" />-->
-<!--        </jaxrs:serviceBeans>-->
-<!--        <jaxrs:providers>-->
-<!--            <bean class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>-->
-<!--        </jaxrs:providers>-->
-<!--    </jaxrs:server>-->
-
     <jaxrs:server id="tcaRest" address="/api/tca">
         <jaxrs:serviceBeans>
-            <ref component-id="centralizedBean" />
+            <ref component-id="modelBean" />
+            <ref component-id="thresholdBean" />
+            <ref component-id="ruleBean" />
+            <ref component-id="conditionBean" />
+            <ref component-id="alarmBean" />
         </jaxrs:serviceBeans>
         <jaxrs:providers>
-            <bean class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
+            <ref component-id="jsonProvider"/>
+            <ref component-id="jacksonContextResolver"/>
         </jaxrs:providers>
     </jaxrs:server>
 
-
-<!--    <reference id="modelService" interface="org.example.tca.service.ModelService"/>-->
-<!--    <reference id="thresholdService" interface="org.example.tca.service.ThresholdService"/>-->
-
     <reference id="centralizedService" interface="org.example.tca.service.CentralizedService"/>
+
+    <bean id="jsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
+    <bean id="jacksonContextResolver" class="org.example.tca.provider.JacksonContextResolver"/>
 
     <bean id="modelBean" class="org.example.tca.rest.impl.ModelRestImpl" >
         <argument ref="centralizedService"/>
@@ -57,15 +52,6 @@
 
     <bean id="alarmBean" class="org.example.tca.rest.impl.AlarmRestImpl" >
         <argument ref="centralizedService"/>
-    </bean>
-
-
-    <bean id="centralizedBean" class="org.example.tca.rest.impl.CentralizedRestImpl" >
-        <argument ref="modelBean"/>
-        <argument ref="thresholdBean"/>
-        <argument ref="ruleBean"/>
-        <argument ref="conditionBean"/>
-        <argument ref="alarmBean"/>
     </bean>
 
 </blueprint>

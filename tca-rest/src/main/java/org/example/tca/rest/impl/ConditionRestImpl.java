@@ -1,7 +1,7 @@
 package org.example.tca.rest.impl;
 
 import org.example.tca.rest.ConditionRest;
-import org.example.tca.rest.TCARestUtil;
+import org.example.tca.response.TCAResponseUtil;
 import org.example.tca.service.CentralizedService;
 import org.example.tca.vo.ConditionVO;
 
@@ -16,76 +16,76 @@ public class ConditionRestImpl implements ConditionRest {
     }
 
     @Override
-    public Response listCondition(String name, String family, String objectType, String tcaLable, Long id) {
+    public Response listCondition(String name, String family, String objectType, String tcaLabel, Long id) {
         try {
             return Response
                     .ok()
-                    .entity(m_service.getConditions(name, family, objectType, tcaLable, id))
+                    .entity(m_service.getConditions(name, family, objectType, tcaLabel, id))
                     .build();
         } catch (Exception e) {
-            return TCARestUtil.printFailResponse("Get all conditions for "
-                    + TCARestUtil.printPath(name, family, objectType, tcaLable, id) + " failed", e);
+            return TCAResponseUtil.printFailResponse("Get all conditions for "
+                    + TCAResponseUtil.printPath(name, family, objectType, tcaLabel, id) + " failed", e);
         }
     }
 
     @Override
-    public Response getCondition(String name, String family, String objectType, String tcaLable, Long id, String attributeName) {
+    public Response getCondition(String name, String family, String objectType, String tcaLabel, Long id, String attributeName) {
         try {
             return Response
                     .ok()
-                    .entity(m_service.getCondition(name, family, objectType, tcaLable, id, attributeName))
+                    .entity(m_service.getCondition(name, family, objectType, tcaLabel, id, attributeName))
                     .build();
         } catch (Exception e) {
-            return TCARestUtil.printFailResponse("Get all condition for "
-                    + TCARestUtil.printPath(name, family, objectType, tcaLable, id, attributeName) + " failed", e);
+            return TCAResponseUtil.printFailResponse("Get all condition for "
+                    + TCAResponseUtil.printPath(name, family, objectType, tcaLabel, id, attributeName) + " failed", e);
         }
     }
 
     @Override
-    public Response addCondition(String name, String family, String objectType, String tcaLable, Long id, ConditionVO conditionVO) {
+    public Response addCondition(String name, String family, String objectType, String tcaLabel, Long id, ConditionVO conditionVO) {
         try {
-            m_service.addCondition(name, family, objectType, tcaLable, id, conditionVO);
-            return TCARestUtil.printPassResponse("Added condition for "
-                    + TCARestUtil.printPath(name, family, objectType, tcaLable, id, conditionVO.getAttributeName()) + " successfully");
+            m_service.addCondition(name, family, objectType, tcaLabel, id, conditionVO);
+            return TCAResponseUtil.printPassResponse("Added condition "
+                    + TCAResponseUtil.printPath(name, family, objectType, tcaLabel, id, conditionVO.getAttributeName()) + " successfully");
         } catch (Exception e) {
-            return TCARestUtil.printFailResponse("Added condition for "
-                    + TCARestUtil.printPath(name, family, objectType, tcaLable, id, conditionVO.getAttributeName()) + " failed", e);
+            return TCAResponseUtil.printFailResponse("Add condition "
+                    + TCAResponseUtil.printPath(name, family, objectType, tcaLabel, id, conditionVO.getAttributeName()) + " failed", e);
         }
     }
 
     @Override
-    public Response updateCondition(String name, String family, String objectType, String tcaLable, Long id, String attributeName, ConditionVO conditionVO) {
+    public Response updateCondition(String name, String family, String objectType, String tcaLabel, Long id, String attributeName, ConditionVO conditionVO) {
         try {
-            m_service.updateCondition(name, family, objectType, tcaLable, id, attributeName, conditionVO);
-            return TCARestUtil.printPassResponse("Updated condition for "
-                    + TCARestUtil.printPath(name, family, objectType, tcaLable, id, conditionVO.getAttributeName()) + " successfully");
+            m_service.updateCondition(name, family, objectType, tcaLabel, id, attributeName, conditionVO);
+            return TCAResponseUtil.printPassResponse("Updated condition "
+                    + TCAResponseUtil.printPath(name, family, objectType, tcaLabel, id, conditionVO.getAttributeName()) + " successfully");
         } catch (Exception e) {
-            return TCARestUtil.printFailResponse("Updated condition for "
-                    + TCARestUtil.printPath(name, family, objectType, tcaLable, id, conditionVO.getAttributeName()) + " failed", e);
+            return TCAResponseUtil.printFailResponse("Update condition "
+                    + TCAResponseUtil.printPath(name, family, objectType, tcaLabel, id, conditionVO.getAttributeName()) + " failed", e);
         }
     }
 
     @Override
-    public Response deleteCondition(String name, String family, String objectType, String tcaLable, Long id, String attributeName) {
+    public Response deleteCondition(String name, String family, String objectType, String tcaLabel, Long id, String attributeName) {
         try {
-            m_service.deleteCondition(name, family, objectType, tcaLable, id, attributeName);
-            return TCARestUtil.printPassResponse("Updated condition for "
-                    + TCARestUtil.printPath(name, family, objectType, tcaLable, id, attributeName) + " successfully");
+            m_service.deleteCondition(name, family, objectType, tcaLabel, id, attributeName);
+            return TCAResponseUtil.printPassResponse("Deleted condition "
+                    + TCAResponseUtil.printPath(name, family, objectType, tcaLabel, id, attributeName) + " successfully");
         } catch (Exception e) {
-            return TCARestUtil.printFailResponse("Updated condition for "
-                    + TCARestUtil.printPath(name, family, objectType, tcaLable, id, attributeName) + " failed", e);
+            return TCAResponseUtil.printFailResponse("Delete condition "
+                    + TCAResponseUtil.printPath(name, family, objectType, tcaLabel, id, attributeName) + " failed", e);
         }
     }
 
     @Override
-    public Response deleteAllCondition(String name, String family, String objectType, String tcaLable, Long id) {
+    public Response deleteAllCondition(String name, String family, String objectType, String tcaLabel, Long id) {
         try {
-            m_service.deleteAllCondition(name, family, objectType, tcaLable, id);
-            return TCARestUtil.printPassResponse("Updated condition for "
-                    + TCARestUtil.printPath(name, family, objectType, tcaLable, id) + " successfully");
+            m_service.deleteAllCondition(name, family, objectType, tcaLabel, id);
+            return TCAResponseUtil.printPassResponse("Deleted all conditions for "
+                    + TCAResponseUtil.printPath(name, family, objectType, tcaLabel, id) + " successfully");
         } catch (Exception e) {
-            return TCARestUtil.printFailResponse("Updated condition for "
-                    + TCARestUtil.printPath(name, family, objectType, tcaLable, id) + " failed", e);
+            return TCAResponseUtil.printFailResponse("Delete all conditions for "
+                    + TCAResponseUtil.printPath(name, family, objectType, tcaLabel, id) + " failed", e);
         }
     }
 }

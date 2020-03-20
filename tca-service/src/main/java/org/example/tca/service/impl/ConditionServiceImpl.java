@@ -13,7 +13,7 @@ import org.example.tca.exception.ModelException;
 import org.example.tca.exception.RuleException;
 import org.example.tca.exception.ThresholdException;
 import org.example.tca.service.ConditionService;
-import org.example.tca.util.ConditionUtil;
+import org.example.tca.parsing.ConditionParsing;
 import org.example.tca.vo.ConditionVO;
 
 import java.util.ArrayList;
@@ -49,8 +49,6 @@ public class ConditionServiceImpl implements ConditionService {
         return conditionVOs;
     }
 
-
-
     @Override
     public ConditionVO getCondition(String name, String family, String objectType, String tcaLabel, Long id, String attributeName)
             throws ModelException, ThresholdException, RuleException {
@@ -64,7 +62,7 @@ public class ConditionServiceImpl implements ConditionService {
         Rule ruleDB = getRuleDB(name, family, objectType, tcaLabel, id);
 
         try {
-            m_conditionDAO.add(ruleDB, ConditionUtil.parseConditionVOToEntity(conditionVO));
+            m_conditionDAO.add(ruleDB, ConditionParsing.parseConditionVOToEntity(conditionVO));
         } catch (Exception e) {
             throw new ConditionExeption(e.getMessage());
         }
@@ -74,7 +72,7 @@ public class ConditionServiceImpl implements ConditionService {
     public void updateCondition(String name, String family, String objectType, String tcaLabel, Long id, String attributeName, ConditionVO conditionVO) throws ModelException, ThresholdException, RuleException, ConditionExeption {
         Rule ruleDB = getRuleDB(name, family, objectType, tcaLabel, id);
         try {
-            m_conditionDAO.update(ruleDB, attributeName, ConditionUtil.parseConditionVOToEntity(conditionVO));
+            m_conditionDAO.update(ruleDB, attributeName, ConditionParsing.parseConditionVOToEntity(conditionVO));
         } catch (Exception e) {
             throw new ConditionExeption(e.getMessage());
         }

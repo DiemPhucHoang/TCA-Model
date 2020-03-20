@@ -1,5 +1,6 @@
 package org.example.tca.response;
 
+// Throw exactly exception layer, that we can navigate on GUI
 public enum Level {
 
     Model("Model"),

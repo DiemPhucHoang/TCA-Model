@@ -1,6 +1,6 @@
 package org.example.tca.rest.impl;
 
-import org.example.tca.rest.TCARestUtil;
+import org.example.tca.response.TCAResponseUtil;
 import org.example.tca.rest.ThresholdRest;
 import org.example.tca.service.CentralizedService;
 import org.example.tca.vo.ThresholdVO;
@@ -23,19 +23,19 @@ public class ThresholdRestImpl implements ThresholdRest {
                     .entity(m_service.getThresholds(name, family))
                     .build();
         } catch (Exception e) {
-            return TCARestUtil.printFailResponse("Get all thresholds for " + TCARestUtil.printPath(name, family) + " failed", e);
+            return TCAResponseUtil.printFailResponse("Get all thresholds for " + TCAResponseUtil.printPath(name, family) + " failed", e);
         }
     }
 
     @Override
-    public Response getThreshold(String name, String family, String objectType, String tcaLable) {
+    public Response getThreshold(String name, String family, String objectType, String tcaLabel) {
         try {
             return Response
                     .ok()
-                    .entity(m_service.getThreshold(name, family, objectType, tcaLable))
+                    .entity(m_service.getThreshold(name, family, objectType, tcaLabel))
                     .build();
         } catch (Exception e) {
-            return TCARestUtil.printFailResponse("Get threshold for " + TCARestUtil.printPath(name, family, objectType, tcaLable) + " failed", e);
+            return TCAResponseUtil.printFailResponse("Get threshold for " + TCAResponseUtil.printPath(name, family, objectType, tcaLabel) + " failed", e);
         }
     }
 
@@ -43,29 +43,19 @@ public class ThresholdRestImpl implements ThresholdRest {
     public Response addThreshold(String name, String family, ThresholdVO thresholdVO) {
         try {
             m_service.addThreshold(name, family, thresholdVO);
-            return TCARestUtil.printPassResponse("Added threshold for " + TCARestUtil.printPath(name, family) + " successfully");
+            return TCAResponseUtil.printPassResponse("Added threshold for " + TCAResponseUtil.printPath(name, family) + " successfully");
         } catch (Exception e) {
-            return TCARestUtil.printFailResponse("Added threshold for " + TCARestUtil.printPath(name, family) + " failed", e);
+            return TCAResponseUtil.printFailResponse("Add threshold for " + TCAResponseUtil.printPath(name, family) + " failed", e);
         }
     }
 
     @Override
-    public Response updateThreshold(String name, String family, String objectType, String tcaLable, ThresholdVO thresholdVO) {
+    public Response deleteThreshold(String name, String family, String objectType, String tcaLabel) {
         try {
-            m_service.updateThreshold(name, family, objectType, tcaLable, thresholdVO);
-            return TCARestUtil.printPassResponse("Updated threshold for " + TCARestUtil.printPath(name, family) + " successfully");
+            m_service.deleteThreshold(name, family, objectType, tcaLabel);
+            return TCAResponseUtil.printPassResponse("Deleted threshold for " + TCAResponseUtil.printPath(name, family) + " successfully");
         } catch (Exception e) {
-            return TCARestUtil.printFailResponse("Updated threshold for " + TCARestUtil.printPath(name, family) + " failed", e);
-        }
-    }
-
-    @Override
-    public Response deleteThreshold(String name, String family, String objectType, String tcaLable) {
-        try {
-            m_service.deleteThreshold(name, family, objectType, tcaLable);
-            return TCARestUtil.printPassResponse("Deleted threshold for " + TCARestUtil.printPath(name, family) + " successfully");
-        } catch (Exception e) {
-            return TCARestUtil.printFailResponse("Deleted threshold for " + TCARestUtil.printPath(name, family) + " failed", e);
+            return TCAResponseUtil.printFailResponse("Delete threshold for " + TCAResponseUtil.printPath(name, family) + " failed", e);
         }
     }
 
@@ -73,9 +63,9 @@ public class ThresholdRestImpl implements ThresholdRest {
     public Response deleteAllThreshold(String name, String family) {
         try {
             m_service.deleteAllThreshold(name, family);
-            return TCARestUtil.printPassResponse("Delete all threshold for " + TCARestUtil.printPath(name, family) + " successfully");
+            return TCAResponseUtil.printPassResponse("Deleted all threshold for " + TCAResponseUtil.printPath(name, family) + " successfully");
         } catch (Exception e) {
-            return TCARestUtil.printFailResponse("Delete all threshold for " + TCARestUtil.printPath(name, family) + " failed", e);
+            return TCAResponseUtil.printFailResponse("Delete all threshold for " + TCAResponseUtil.printPath(name, family) + " failed", e);
         }
     }
 }

@@ -10,7 +10,7 @@ import org.example.tca.exception.ModelException;
 import org.example.tca.exception.RuleException;
 import org.example.tca.exception.ThresholdException;
 import org.example.tca.service.RuleService;
-import org.example.tca.util.RuleUtil;
+import org.example.tca.parsing.RuleParsing;
 import org.example.tca.vo.RuleVO;
 
 import java.util.ArrayList;
@@ -57,7 +57,7 @@ public class RuleServiceImpl implements RuleService {
             throws ModelException, ThresholdException, RuleException {
         Threshold thresholdDB = getThresholdDB(name, family, objectType, tcaLabel);
         try {
-            m_ruleDAO.add(thresholdDB, RuleUtil.parseRuleVOToEntity(ruleVO));
+            m_ruleDAO.add(thresholdDB, RuleParsing.parseRuleVOToEntity(ruleVO));
         } catch (Exception e) {
             throw new RuleException(e.getMessage());
         }
@@ -69,7 +69,7 @@ public class RuleServiceImpl implements RuleService {
             throws ModelException, ThresholdException, RuleException {
         Threshold thresholdDB = getThresholdDB(name, family, objectType, tcaLabel);
         try {
-            m_ruleDAO.update(thresholdDB, id, RuleUtil.parseRuleVOToEntity(ruleVO));
+            m_ruleDAO.update(thresholdDB, id, RuleParsing.parseRuleVOToEntity(ruleVO));
         } catch (Exception e) {
             throw new RuleException(e.getMessage());
         }

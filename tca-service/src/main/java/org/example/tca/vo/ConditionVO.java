@@ -3,14 +3,16 @@ package org.example.tca.vo;
 import org.example.tca.api.Condition;
 
 public class ConditionVO {
+
     private String attributeName;
     private String attributeGuiName;
     private String objectType;
     private String operator;
-    private Long value;
+    private Long defaultValue;
     private String clearOperator;
-    private Long clearValue;
+    private Long clearDefaultValue;
     private Boolean rate;
+    private Double counterMax;
 
     public ConditionVO() {
     }
@@ -20,9 +22,9 @@ public class ConditionVO {
         this.attributeGuiName = condition.getAttributeGuiName();
         this.objectType = condition.getObjectType();
         this.operator = condition.getOperator().getKey();
-        this.value = condition.getValue();
+        this.defaultValue = condition.getValue();
         this.clearOperator = condition.getClearOperator().getKey();
-        this.clearValue = condition.getClearValue();
+        this.clearDefaultValue = condition.getClearValue();
         this.rate = condition.getRate();
     }
 
@@ -58,12 +60,20 @@ public class ConditionVO {
         this.operator = operator;
     }
 
-    public Long getValue() {
-        return value;
+    public Boolean getRate() {
+        return rate;
     }
 
-    public void setValue(Long value) {
-        this.value = value;
+    public void setRate(Boolean rate) {
+        this.rate = rate;
+    }
+
+    public Long getDefaultValue() {
+        return defaultValue;
+    }
+
+    public void setDefaultValue(Long defaultValue) {
+        this.defaultValue = defaultValue;
     }
 
     public String getClearOperator() {
@@ -74,20 +84,20 @@ public class ConditionVO {
         this.clearOperator = clearOperator;
     }
 
-    public Long getClearValue() {
-        return clearValue;
+    public Long getClearDefaultValue() {
+        return clearDefaultValue;
     }
 
-    public void setClearValue(Long clearValue) {
-        this.clearValue = clearValue;
+    public void setClearDefaultValue(Long clearDefaultValue) {
+        this.clearDefaultValue = clearDefaultValue;
     }
 
-    public Boolean getRate() {
-        return rate;
+    public Double getCounterMax() {
+        return counterMax;
     }
 
-    public void setRate(Boolean rate) {
-        this.rate = rate;
+    public void setCounterMax(Double counterMax) {
+        this.counterMax = counterMax;
     }
 
     @Override
@@ -96,11 +106,12 @@ public class ConditionVO {
                 "attributeName='" + attributeName + '\'' +
                 ", attributeGuiName='" + attributeGuiName + '\'' +
                 ", objectType='" + objectType + '\'' +
-                ", operator=" + operator +
-                ", value=" + value +
-                ", clearOperator=" + clearOperator +
-                ", clearValue=" + clearValue +
+                ", operator='" + operator + '\'' +
+                ", defaultValue=" + defaultValue +
+                ", clearOperator='" + clearOperator + '\'' +
+                ", clearDefaultValue=" + clearDefaultValue +
                 ", rate=" + rate +
+                ", counterMax=" + counterMax +
                 '}';
     }
 }

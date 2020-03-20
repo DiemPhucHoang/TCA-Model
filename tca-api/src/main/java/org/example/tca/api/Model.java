@@ -69,6 +69,19 @@ public class Model implements Serializable {
         this.activationTime = activationTime ;
     }
 
+    public Model(String name, String family, String version, String description, String build,
+                 Date parseTime, String author, Date date, String modelFileName) {
+        this.name = name;
+        this.family = family;
+        this.version = version;
+        this.description = description;
+        this.build = build;
+        this.date = date;
+        this.author = author;
+        this.activationTime = new Date() ;
+        this.modelFileName = modelFileName;
+    }
+
     public Long getId() {
         return id;
     }

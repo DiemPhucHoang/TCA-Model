@@ -2,7 +2,6 @@ package org.example.tca.api;
 
 public enum Aggregator {
 
-    // Enum nay chua dung ne
     avg("avg", 0),
     percentile_50th("percentile-50th", 1),
     percentile_75th("percentile-75th", 2),

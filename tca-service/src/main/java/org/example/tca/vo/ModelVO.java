@@ -1,7 +1,9 @@
 package org.example.tca.vo;
 
 import org.example.tca.api.Model;
-import org.example.tca.util.ModelUtil;
+import org.example.tca.parsing.ModelParsing;
+
+import java.util.List;
 
 public class ModelVO {
 
@@ -14,6 +16,8 @@ public class ModelVO {
     private String author;
     private String activationTime;
     private int noOfTCAs;
+    private String modelFileName;
+    private List<ThresholdVO> thresholds;
 
     public ModelVO() {
     }
@@ -24,10 +28,22 @@ public class ModelVO {
         this.version = model.getVersion();
         this.description = model.getDescription();
         this.build = model.getBuild();
-        this.date = ModelUtil.parseTime(model.getDate());
+        this.date = ModelParsing.parseTime(model.getDate());
         this.author = model.getAuthor();
-        this.activationTime = ModelUtil.parseTime(model.getActivationTime());
+        this.activationTime = ModelParsing.parseTime(model.getActivationTime());
         this.noOfTCAs = model.getThresholds() == null ? 0 : model.getThresholds().size();
+    }
+
+    public ModelVO(ModelVO modelVO) {
+        this.name = modelVO.getName();
+        this.family = modelVO.getFamily();
+        this.version = modelVO.getVersion();
+        this.description = modelVO.getDescription();
+        this.build = modelVO.getBuild();
+        this.date = modelVO.getDate();
+        this.author = modelVO.getAuthor();
+        this.activationTime = modelVO.getActivationTime();
+        this.thresholds = modelVO.getThresholds();
     }
 
     public String getName() {
@@ -94,13 +110,28 @@ public class ModelVO {
         this.activationTime = activationTime;
     }
 
-
     public int getNoOfTCAs() {
         return noOfTCAs;
     }
 
     public void setNoOfTCAs(int noOfTCAs) {
         this.noOfTCAs = noOfTCAs;
+    }
+
+    public String getModelFileName() {
+        return modelFileName;
+    }
+
+    public void setModelFileName(String modelFileName) {
+        this.modelFileName = modelFileName;
+    }
+
+    public List<ThresholdVO> getThresholds() {
+        return thresholds;
+    }
+
+    public void setThresholds(List<ThresholdVO> thresholds) {
+        this.thresholds = thresholds;
     }
 
     @Override

@@ -11,13 +11,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity (name = "Threshold")
-@Table (name = "tca_threshold", uniqueConstraints = {@UniqueConstraint(columnNames = {"object_type", "tca_label"})})
+@Table (name = "tca_threshold")
 public class Threshold implements Serializable {
 
     @Id
@@ -31,9 +30,6 @@ public class Threshold implements Serializable {
     @Column(name = "tca_label", length = 65)
     private String tcaLabel;
 
-    @Column(name = "description", length = 255)
-    private String description;
-
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "model_id", nullable = false)
     private Model model;
@@ -44,10 +40,9 @@ public class Threshold implements Serializable {
     public Threshold() {
     }
 
-    public Threshold(String objectType, String tcaLabel, String description) {
+    public Threshold(String objectType, String tcaLabel) {
         this.objectType = objectType;
         this.tcaLabel = tcaLabel;
-        this.description = description;
     }
 
     public Long getId() {
@@ -72,14 +67,6 @@ public class Threshold implements Serializable {
 
     public void setTcaLabel(String tcaLabel) {
         this.tcaLabel = tcaLabel;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public Model getModel() {

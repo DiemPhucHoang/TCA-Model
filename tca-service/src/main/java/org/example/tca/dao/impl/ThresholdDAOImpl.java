@@ -66,27 +66,6 @@ public class ThresholdDAOImpl implements ThresholdDAO {
 
     @Override
     @Transactional(Transactional.TxType.REQUIRES_NEW)
-    public void update(Model model, String objectType, String tcaLabel, Threshold threshold) throws ThresholdException {
-        Threshold thresholdDB = get(model, objectType, tcaLabel);
-
-        if (thresholdDB == null) {
-            throw new ThresholdException("Threshold with objectType '" + threshold.getObjectType() + "' and tcaLabel '" + threshold.getTcaLabel() + "' does not exist");
-        }
-
-        try {
-            thresholdDB.setModel(model);
-            thresholdDB.setObjectType(threshold.getObjectType());
-            thresholdDB.setTcaLabel(threshold.getTcaLabel());
-            thresholdDB.setDescription(threshold.getDescription());
-            m_entityManager.merge(thresholdDB);
-        } catch (Exception e) {
-            throw new ThresholdException(e.getMessage());
-        }
-    }
-
-
-    @Override
-    @Transactional(Transactional.TxType.REQUIRES_NEW)
     public void delete(Model model, String objectType, String tcaLabel) throws ThresholdException {
         Threshold thresholdDB = get(model, objectType, tcaLabel);
 
@@ -111,6 +90,4 @@ public class ThresholdDAOImpl implements ThresholdDAO {
             throw new ThresholdException(e.getMessage());
         }
     }
-
-
 }

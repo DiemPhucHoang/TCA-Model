@@ -16,14 +16,24 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.example.tca</groupId>
+            <artifactId>tca-service</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>javax.ws.rs</groupId>
             <artifactId>javax.ws.rs-api</artifactId>
             <version>2.1</version>
         </dependency>
         <dependency>
-            <groupId>org.example.tca</groupId>
-            <artifactId>tca-service</artifactId>
-            <version>${project.version}</version>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+            <version>3.3.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.10.3</version>
         </dependency>
     </dependencies>
 
@@ -35,10 +45,11 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-<!--                        <Export-Package>org.example.tca.rest</Export-Package>-->
                         <Import-Package>
+                            !org.apache.cxf.jaxrs,
                             *
                         </Import-Package>
+                        <Embed-Dependency>jaxrs</Embed-Dependency>
                         <_removeheaders>Import-Service,Export-Service,Require-Capability,Provide-Capability</_removeheaders>
                     </instructions>
                 </configuration>

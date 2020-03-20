@@ -7,7 +7,7 @@ import org.example.tca.dao.ThresholdDAO;
 import org.example.tca.exception.ModelException;
 import org.example.tca.exception.ThresholdException;
 import org.example.tca.service.ThresholdService;
-import org.example.tca.util.ThresholdUtil;
+import org.example.tca.parsing.ThresholdParsing;
 import org.example.tca.vo.ThresholdVO;
 
 import java.util.ArrayList;
@@ -54,21 +54,8 @@ public class ThresholdServiceImpl implements ThresholdService {
         Model modelDB = getModelDB(name, family);
 
         try {
-            m_thresholdDAO.add(modelDB, ThresholdUtil.parseThresholdVOToEntity(thresholdVO));
+            m_thresholdDAO.add(modelDB, ThresholdParsing.parseThresholdVOToEntity(thresholdVO));
 
-        } catch (Exception e) {
-            throw new ThresholdException(e.getMessage());
-        }
-    }
-
-
-    @Override
-    public void updateThreshold(String name, String family, String objectType, String tcaLabel, ThresholdVO thresholdVO)
-            throws ModelException, ThresholdException {
-        Model modelDB = getModelDB(name, family);
-
-        try {
-            m_thresholdDAO.update(modelDB, objectType, tcaLabel, ThresholdUtil.parseThresholdVOToEntity(thresholdVO));
         } catch (Exception e) {
             throw new ThresholdException(e.getMessage());
         }
