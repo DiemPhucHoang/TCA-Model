@@ -1,5 +1,10 @@
 package org.example.tca.api;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,6 +31,7 @@ public class Alarm {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rule_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Rule rule;
 
     public Alarm() {

@@ -22,10 +22,11 @@ public class ConditionVO {
         this.attributeGuiName = condition.getAttributeGuiName();
         this.objectType = condition.getObjectType();
         this.operator = condition.getOperator().getKey();
-        this.defaultValue = condition.getValue();
-        this.clearOperator = condition.getClearOperator().getKey();
-        this.clearDefaultValue = condition.getClearValue();
+        this.defaultValue = condition.getDefaultValue();
+        this.clearOperator = condition.getClearOperator() == null ? null : condition.getClearOperator().getKey();
+        this.clearDefaultValue = condition.getClearDefaultValue();
         this.rate = condition.getRate();
+        this.counterMax = condition.getCounterMax();
     }
 
     public String getAttributeName() {

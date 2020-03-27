@@ -1,5 +1,8 @@
 package org.example.tca.api;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,12 +14,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity (name = "Threshold")
-@Table (name = "tca_threshold")
+@Table (name = "tca_threshold", uniqueConstraints = {@UniqueConstraint(columnNames = {"object_type", "tca_label", "model_id"})})
 public class Threshold implements Serializable {
 
     @Id
@@ -34,7 +38,8 @@ public class Threshold implements Serializable {
     @JoinColumn(name = "model_id", nullable = false)
     private Model model;
 
-    @OneToMany(mappedBy = "threshold", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "threshold", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Rule> rules = new ArrayList<>();
 
     public Threshold() {

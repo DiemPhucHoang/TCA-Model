@@ -120,7 +120,7 @@ public class ModelParsing {
         for (RuleVO ruleVO : ruleVOs) {
             Aggregator aggregator = ruleVO.getAggregator() == null ? null : Aggregator.from(ruleVO.getAggregator());
             ConditionLogicalOperator conditionLogicalOperator = ruleVO.getConditionLogicalOperator() == null ? null : ConditionLogicalOperator.from(ruleVO.getConditionLogicalOperator());
-            Rule rule = new Rule(conditionLogicalOperator, aggregator, ruleVO.getAggregationPeriod());
+            Rule rule = new Rule(ruleVO.getId(), conditionLogicalOperator, aggregator, ruleVO.getAggregationPeriod());
             rule.setThreshold(threshold);
             rule.setConditions(convertConditions(ruleVO.getConditions(), rule));
             rule.setAlarm(convertAlarm(ruleVO.getAlarm(), rule));

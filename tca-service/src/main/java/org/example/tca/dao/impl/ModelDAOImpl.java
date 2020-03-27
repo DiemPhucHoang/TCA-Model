@@ -112,5 +112,14 @@ public class ModelDAOImpl implements ModelDAO {
         } catch (Exception e) {
             throw new ModelException(e.getMessage());
         }
+
+//        try {
+//            List<Model> models = list();
+//            for(Model model: models) {
+//                delete(model.getName(), model.getFamily());
+//            }
+//        } catch (Exception e) {
+//            throw new ModelException(e.getMessage());
+//        }
     }
 }

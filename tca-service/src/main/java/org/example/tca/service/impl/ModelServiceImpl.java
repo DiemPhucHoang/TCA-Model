@@ -37,9 +37,11 @@ public class ModelServiceImpl implements ModelService {
         if (family.contains(",")) {
             String[] splitFamilies = family.split(",");
             for (String f : splitFamilies) {
-                ModelVO newModelVO = new ModelVO(modelVO);
-                newModelVO.setFamily(f);
-                modelVOs.add(newModelVO);
+                if (!f.trim().isEmpty()) {
+                    ModelVO newModelVO = new ModelVO(modelVO);
+                    newModelVO.setFamily(f.trim());
+                    modelVOs.add(newModelVO);
+                }
             }
         } else {
             modelVOs.add(modelVO);

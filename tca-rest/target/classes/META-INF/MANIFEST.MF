@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1584702687284
+Bnd-LastModified: 1585325162503
 Build-Jdk: 1.8.0_211
 Built-By: nminhtuan
 Bundle-Blueprint: OSGI-INF/blueprint/rest.xml

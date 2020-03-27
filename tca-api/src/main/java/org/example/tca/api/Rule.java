@@ -1,5 +1,9 @@
 package org.example.tca.api;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -38,16 +42,18 @@ public class Rule implements Serializable {
     @JoinColumn(name = "threshold_id", nullable = false)
     private Threshold threshold;
 
-    @OneToMany(mappedBy = "rule", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "rule", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Condition> conditions = new ArrayList<>();
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "rule")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "rule", orphanRemoval = true)
     private Alarm alarm;
 
     public Rule() {
     }
 
-    public Rule(ConditionLogicalOperator conditionLogicalOperator, Aggregator aggregator, String aggregationPeriod) {
+    public Rule(Long id, ConditionLogicalOperator conditionLogicalOperator, Aggregator aggregator, String aggregationPeriod) {
+        this.id = id;
         this.conditionLogicalOperator = conditionLogicalOperator == null ? ConditionLogicalOperator.and : conditionLogicalOperator;
         this.aggregator = aggregator == null ? Aggregator.avg : aggregator;
         this.aggregationPeriod = aggregationPeriod == null ? "PT6H" : aggregationPeriod;

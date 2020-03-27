@@ -89,9 +89,9 @@ public class ConditionDAOImpl implements ConditionDAO {
         conditionDB.setAttributeGuiName(condition.getAttributeGuiName());
         conditionDB.setObjectType(condition.getObjectType());
         conditionDB.setOperator(condition.getOperator());
-        conditionDB.setValue(condition.getValue());
+        conditionDB.setDefaultValue(condition.getDefaultValue());
         conditionDB.setClearOperator(condition.getClearOperator());
-        conditionDB.setClearValue(condition.getClearValue());
+        conditionDB.setClearDefaultValue(condition.getClearDefaultValue());
         conditionDB.setRate(condition.getRate());
         conditionDB.setCounterMax(condition.getCounterMax());
     }

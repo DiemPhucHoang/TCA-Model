@@ -16,29 +16,29 @@ import javax.ws.rs.core.Response;
 @Path("/models")
 @Produces(MediaType.APPLICATION_JSON)
 public interface AlarmRest {
-    @Path("/{name}/{family}/thresholds/{objectType}/{tcaLable}/rules/{idRule}/alarm/{idAlarm}")
+    @Path("/{name}/{family}/thresholds/{objectType}/{tcaLabel}/rules/{idRule}/alarm/{idAlarm}")
     @GET
     Response getAlarm(@PathParam("name") String name, @PathParam("family") String family,
-                     @PathParam("objectType") String objectType, @PathParam("tcaLable") String tcaLable,
+                     @PathParam("objectType") String objectType, @PathParam("tcaLabel") String tcaLabel,
                      @PathParam("idRule") Long idRule, @PathParam("idAlarm") Long idAlarm);
 
-    @Path("/{name}/{family}/thresholds/{objectType}/{tcaLable}/rules/{idRule}/alarm")
+    @Path("/{name}/{family}/thresholds/{objectType}/{tcaLabel}/rules/{idRule}/alarm")
     @Consumes("application/json")
     @POST
     Response addAlarm(@PathParam("name") String name, @PathParam("family") String family,
-                      @PathParam("objectType") String objectType, @PathParam("tcaLable") String tcaLable,
+                      @PathParam("objectType") String objectType, @PathParam("tcaLabel") String tcaLabel,
                       @PathParam("idRule") Long idRule, AlarmVO alarmVO);
 
-    @Path("/{name}/{family}/thresholds/{objectType}/{tcaLable}/rules/{idRule}/alarm/{idAlarm}")
+    @Path("/{name}/{family}/thresholds/{objectType}/{tcaLabel}/rules/{idRule}/alarm/{idAlarm}")
     @Consumes("application/json")
     @PUT
     Response updateAlarm(@PathParam("name") String name, @PathParam("family") String family,
-                         @PathParam("objectType") String objectType, @PathParam("tcaLable") String tcaLable,
+                         @PathParam("objectType") String objectType, @PathParam("tcaLabel") String tcaLabel,
                          @PathParam("idRule") Long idRule, @PathParam("idAlarm") Long idAlarm, AlarmVO alarmVO);
 
-    @Path("/{name}/{family}/thresholds/{objectType}/{tcaLable}/rules/{idRule}/alarm/{idAlarm}")
+    @Path("/{name}/{family}/thresholds/{objectType}/{tcaLabel}/rules/{idRule}/alarm/{idAlarm}")
     @DELETE
     Response deleteAlarm(@PathParam("name") String name, @PathParam("family") String family,
-                         @PathParam("objectType") String objectType, @PathParam("tcaLable") String tcaLable,
+                         @PathParam("objectType") String objectType, @PathParam("tcaLabel") String tcaLabel,
                          @PathParam("idRule") Long idRule, @PathParam("idAlarm") Long idAlarm);
 }

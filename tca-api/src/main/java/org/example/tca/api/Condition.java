@@ -1,5 +1,6 @@
 package org.example.tca.api;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,7 +21,7 @@ public class Condition implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "attribute_name", length = 128, unique = true)
+    @Column(name = "attribute_name", length = 128)
     private String attributeName;
 
     @Column(name = "attribute_gui_name",length = 128)
@@ -32,14 +33,14 @@ public class Condition implements Serializable {
     @Column(name = "operator", nullable = false)
     private Operator operator;
 
-    @Column(name = "value", nullable = false)
-    private Long value;
+    @Column(name = "default_value", nullable = false)
+    private Long defaultValue;
 
     @Column(name = "clear_operator")
     private Operator clearOperator;
 
-    @Column(name = "clear_value")
-    private Long clearValue;
+    @Column(name = "clear_default_value")
+    private Long clearDefaultValue;
 
     @Column(name = "rate")
     private Boolean rate;
@@ -55,27 +56,27 @@ public class Condition implements Serializable {
     }
 
     public Condition(String attributeName, String attributeGuiName, String objectType, Operator operator,
-                     Long value, Operator clearOperator, Long clearValue, Boolean rate, Double counterMax) {
+                     Long defaultValue, Operator clearOperator, Long clearDefaultValue, Boolean rate, Double counterMax) {
         this.attributeName = attributeName;
         this.attributeGuiName = attributeGuiName;
         this.objectType = objectType;
         this.operator = operator;
-        this.value = value;
+        this.defaultValue = defaultValue;
         this.clearOperator = clearOperator;
-        this.clearValue = clearValue;
+        this.clearDefaultValue = clearDefaultValue;
         this.rate = rate == null ? false : rate;
         this.counterMax = counterMax == null ? Double.valueOf("18446744073709551615") : counterMax;
     }
 
-    public Condition(String attributeName, String attributeGuiName, String objectType, Operator operator, Long value,
-                     Operator clearOperator, Long clearValue, Boolean rate, Double counterMax, Rule rule) {
+    public Condition(String attributeName, String attributeGuiName, String objectType, Operator operator, Long defaultValue,
+                     Operator clearOperator, Long clearDefaultValue, Boolean rate, Double counterMax, Rule rule) {
         this.attributeName = attributeName;
         this.attributeGuiName = attributeGuiName;
         this.objectType = objectType;
         this.operator = operator;
-        this.value = value;
+        this.defaultValue = defaultValue;
         this.clearOperator = clearOperator;
-        this.clearValue = clearValue;
+        this.clearDefaultValue = clearDefaultValue;
         this.rate = rate == null ? false : rate;
         this.counterMax = counterMax == null ? Double.valueOf("18446744073709551615") : counterMax;
         this.rule = rule;
@@ -121,12 +122,12 @@ public class Condition implements Serializable {
         this.operator = operator;
     }
 
-    public Long getValue() {
-        return value;
+    public Long getDefaultValue() {
+        return defaultValue;
     }
 
-    public void setValue(Long value) {
-        this.value = value;
+    public void setDefaultValue(Long defaultValue) {
+        this.defaultValue = defaultValue;
     }
 
     public Operator getClearOperator() {
@@ -137,12 +138,12 @@ public class Condition implements Serializable {
         this.clearOperator = clearOperator;
     }
 
-    public Long getClearValue() {
-        return clearValue;
+    public Long getClearDefaultValue() {
+        return clearDefaultValue;
     }
 
-    public void setClearValue(Long clearValue) {
-        this.clearValue = clearValue;
+    public void setClearDefaultValue(Long clearDefaultValue) {
+        this.clearDefaultValue = clearDefaultValue;
     }
 
     public Boolean getRate() {

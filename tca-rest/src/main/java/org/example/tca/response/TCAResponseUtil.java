@@ -4,7 +4,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 public class TCAResponseUtil {
-
     public static Response printPassResponse(String message) {
         return Response
                 .ok()

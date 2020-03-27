@@ -1,6 +1,7 @@
 package org.example.tca.parsing;
 
 import org.example.tca.api.Aggregator;
+import org.example.tca.api.Alarm;
 import org.example.tca.api.ConditionLogicalOperator;
 import org.example.tca.api.Rule;
 import org.example.tca.exception.RuleException;
@@ -29,6 +30,6 @@ public class RuleParsing {
             }
         }
 
-        return new Rule(conditionLogicalOperator, aggregator, ruleVO.getAggregationPeriod());
+        return new Rule(ruleVO.getId(), conditionLogicalOperator, aggregator, ruleVO.getAggregationPeriod());
     }
 }

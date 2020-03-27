@@ -5,20 +5,33 @@ import org.example.tca.api.Rule;
 import java.util.List;
 
 public class RuleVO {
+    private Long id;
     private String conditionLogicalOperator;
     private String aggregator;
     private String aggregationPeriod;
     private List<ConditionVO> conditions;
     private int noOfConditions;
     private AlarmVO alarm;
+    private Long alarmId;
 
     public RuleVO() {
     }
 
     public RuleVO(Rule rule) {
+        this.id = rule.getId();
         this.conditionLogicalOperator = rule.getConditionLogicalOperator().getKey();
         this.aggregator = rule.getAggregator().getKey();
         this.aggregationPeriod = rule.getAggregationPeriod();
+        this.noOfConditions = rule.getConditions() == null ? 0 : rule.getConditions().size();
+        this.alarmId = rule.getAlarm() == null ? null :rule.getAlarm().getId();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getConditionLogicalOperator() {
@@ -61,12 +74,22 @@ public class RuleVO {
         this.noOfConditions = noOfConditions;
     }
 
+
+
     public AlarmVO getAlarm() {
         return alarm;
     }
 
     public void setAlarm(AlarmVO alarm) {
         this.alarm = alarm;
+    }
+
+    public Long getAlarmId() {
+        return alarmId;
+    }
+
+    public void setAlarmId(Long alarmId) {
+        this.alarmId = alarmId;
     }
 
     @Override
