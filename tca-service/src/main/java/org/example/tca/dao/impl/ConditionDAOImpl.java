@@ -24,9 +24,13 @@ public class ConditionDAOImpl implements ConditionDAO {
     @Override
     @Transactional(Transactional.TxType.SUPPORTS)
     public List<Condition> list(Rule rule) {
+        int page = 1;
+        int limit = 20;
         TypedQuery<Condition> query = m_entityManager.createQuery("select c from Condition c " +
                 "where c.rule = :rule", Condition.class);
         query.setParameter("rule", rule);
+        query.setFirstResult((page-1) * limit);
+        query.setMaxResults(limit);
         return query.getResultList();
     }
 

@@ -12,7 +12,8 @@
 
     <artifactId>tca-features</artifactId>
     <name>tca/tca-features</name>
-    <packaging>pom</packaging>
+    <packaging>kar</packaging>
+<!--    <packaging>pom</packaging>-->
 
     <build>
         <resources>
@@ -35,27 +36,36 @@
                 </executions>
             </plugin>
 
+            <!--for file kar-->
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>attach-artifacts</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>attach-artifact</goal>
-                        </goals>
-                        <configuration>
-                            <artifacts>
-                                <artifact>
-                                    <file>target/feature/feature.xml</file>
-                                    <type>xml</type>
-                                </artifact>
-                            </artifacts>
-                        </configuration>
-                    </execution>
-                </executions>
+                <groupId>org.apache.karaf.tooling</groupId>
+                <artifactId>karaf-maven-plugin</artifactId>
+                <version>4.2.1</version>
+                <extensions>true</extensions>
             </plugin>
+
+            <!--for mvn-->
+<!--            <plugin>-->
+<!--                <groupId>org.codehaus.mojo</groupId>-->
+<!--                <artifactId>build-helper-maven-plugin</artifactId>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>attach-artifacts</id>-->
+<!--                        <phase>package</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>attach-artifact</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <artifacts>-->
+<!--                                <artifact>-->
+<!--                                    <file>target/feature/feature.xml</file>-->
+<!--                                    <type>xml</type>-->
+<!--                                </artifact>-->
+<!--                            </artifacts>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
         </plugins>
     </build>
 

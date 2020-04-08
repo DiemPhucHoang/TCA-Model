@@ -11,8 +11,38 @@
     <artifactId>tca-package</artifactId>
     <name>tca/tca-package</name>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.example.tca</groupId>
+            <artifactId>tca-features</artifactId>
+            <version>${project.version}</version>
+            <type>kar</type>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-kar-features</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <includeArtifactIds>tca-features</includeArtifactIds>
+                            <outputDirectory>${project.build.directory}</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
@@ -21,7 +51,7 @@
                     <buildArgs>
                         <version>${project.version}</version>
                     </buildArgs>
-                    <imageName>tca-mgt</imageName>
+                    <imageName>tca</imageName>
                     <dockerDirectory>./</dockerDirectory>
                     <forceTags>true</forceTags>
                 </configuration>

@@ -28,6 +28,7 @@ public class ThresholdServiceImpl implements ThresholdService {
     public List<ThresholdVO> getThresholds(String name, String family) throws ModelException {
 
         Model modelDB = getModelDB(name, family);
+
         List<Threshold> thresholds = m_thresholdDAO.list(modelDB);
         if (thresholds == null || thresholds.isEmpty()) {
             return Collections.emptyList();
@@ -54,11 +55,15 @@ public class ThresholdServiceImpl implements ThresholdService {
         Model modelDB = getModelDB(name, family);
 
         try {
-            m_thresholdDAO.add(modelDB, ThresholdParsing.parseThresholdVOToEntity(thresholdVO));
-
+            Threshold threshold = parseThresholdVOToEntity(thresholdVO);
+            m_thresholdDAO.add(modelDB, threshold);
         } catch (Exception e) {
             throw new ThresholdException(e.getMessage());
         }
+    }
+
+    protected Threshold parseThresholdVOToEntity(ThresholdVO thresholdVO) throws Exception {
+         return ThresholdParsing.parseThresholdVOToEntity(thresholdVO);
     }
 
     @Override
@@ -82,12 +87,11 @@ public class ThresholdServiceImpl implements ThresholdService {
         }
     }
 
-    public Model getModelDB(String name, String family) throws ModelException {
+    protected Model getModelDB(String name, String family) throws ModelException {
         Model modelDB = m_modelDAO.get(name, family);
         if (modelDB == null) {
             throw new ModelException("Model with name '" + name + "' and family '" + family + "' does not exists");
         }
         return modelDB;
     }
-
 }

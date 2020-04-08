@@ -54,6 +54,7 @@ public class Model implements Serializable {
     private String modelFileName;
 
     @OneToMany(mappedBy = "model", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Threshold> thresholds = new ArrayList<>();
 
     public Model() {

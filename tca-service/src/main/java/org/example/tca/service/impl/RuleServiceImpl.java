@@ -57,11 +57,16 @@ public class RuleServiceImpl implements RuleService {
             throws ModelException, ThresholdException, RuleException {
         Threshold thresholdDB = getThresholdDB(name, family, objectType, tcaLabel);
         try {
-            m_ruleDAO.add(thresholdDB, RuleParsing.parseRuleVOToEntity(ruleVO));
+            Rule rule = parseRuleVOToEntity(ruleVO);
+            m_ruleDAO.add(thresholdDB, rule);
         } catch (Exception e) {
+            System.out.println("Error while adding rule. " + e.getMessage());
             throw new RuleException(e.getMessage());
         }
+    }
 
+    protected Rule parseRuleVOToEntity(RuleVO ruleVO) {
+        return RuleParsing.parseRuleVOToEntity(ruleVO);
     }
 
     @Override
@@ -69,7 +74,8 @@ public class RuleServiceImpl implements RuleService {
             throws ModelException, ThresholdException, RuleException {
         Threshold thresholdDB = getThresholdDB(name, family, objectType, tcaLabel);
         try {
-            m_ruleDAO.update(thresholdDB, id, RuleParsing.parseRuleVOToEntity(ruleVO));
+            Rule rule = parseRuleVOToEntity(ruleVO);
+            m_ruleDAO.update(thresholdDB, id, rule);
         } catch (Exception e) {
             throw new RuleException(e.getMessage());
         }

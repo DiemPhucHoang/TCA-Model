@@ -26,6 +26,13 @@ public class RuleVO {
         this.alarmId = rule.getAlarm() == null ? null :rule.getAlarm().getId();
     }
 
+    public RuleVO(Long id, String conditionLogicalOperator, String aggregator, String aggregationPeriod) {
+        this.id = id;
+        this.conditionLogicalOperator = conditionLogicalOperator;
+        this.aggregator = aggregator;
+        this.aggregationPeriod = aggregationPeriod;
+    }
+
     public Long getId() {
         return id;
     }

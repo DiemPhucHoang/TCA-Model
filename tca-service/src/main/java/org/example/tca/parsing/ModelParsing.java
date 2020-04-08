@@ -12,6 +12,7 @@ import org.example.tca.api.Operator;
 import org.example.tca.api.PerceivedSeverity;
 import org.example.tca.api.Threshold;
 import org.example.tca.api.Rule;
+import org.example.tca.exception.ModelException;
 import org.example.tca.vo.ModelVO;
 import org.example.tca.vo.ThresholdVO;
 import org.example.tca.vo.AlarmVO;
@@ -72,13 +73,13 @@ public class ModelParsing {
             return null;
         }
         if (modelVO.getName() == null || modelVO.getName().isEmpty()) {
-            throw new Exception("Model name is missing or invalid");
+            throw new ModelException("Model name is missing or invalid");
         }
         if (modelVO.getFamily() == null || modelVO.getFamily().isEmpty()) {
-            throw new Exception("Model family is missing or invalid");
+            throw new ModelException("Model family is missing or invalid");
         }
         if (modelVO.getVersion() == null || modelVO.getVersion().isEmpty()) {
-            throw new Exception("Model version is missing or invalid");
+            throw new ModelException("Model version is missing or invalid");
         }
         return modelVO;
     }

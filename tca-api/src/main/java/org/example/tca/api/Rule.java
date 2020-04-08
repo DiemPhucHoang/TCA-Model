@@ -42,6 +42,7 @@ public class Rule implements Serializable {
     private Threshold threshold;
 
     @OneToMany(mappedBy = "rule", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Condition> conditions = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "rule", orphanRemoval = true)

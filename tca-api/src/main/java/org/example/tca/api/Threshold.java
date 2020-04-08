@@ -39,6 +39,7 @@ public class Threshold implements Serializable {
     private Model model;
 
     @OneToMany(mappedBy = "threshold", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Rule> rules = new ArrayList<>();
 
     public Threshold() {

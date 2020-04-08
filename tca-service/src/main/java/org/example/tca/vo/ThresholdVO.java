@@ -14,6 +14,11 @@ public class ThresholdVO {
     public ThresholdVO() {
     }
 
+    public ThresholdVO(String objectType, String tcaLabel) {
+        this.objectType = objectType;
+        this.tcaLabel = tcaLabel;
+    }
+
     public ThresholdVO(Threshold threshold) {
         this.objectType = threshold.getObjectType();
         this.tcaLabel = threshold.getTcaLabel();

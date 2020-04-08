@@ -52,11 +52,6 @@ public class CentralizedServiceImpl implements CentralizedService {
     }
 
     @Override
-    public void addModel(ModelVO modelVO) throws ModelException {
-        m_modelService.addModel(modelVO);
-    }
-
-    @Override
     public void updateModel(String name, String family, ModelVO modelVO) throws ModelException {
         m_modelService.updateModel(name, family, modelVO);
     }

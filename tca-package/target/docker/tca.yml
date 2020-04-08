@@ -4,13 +4,13 @@ networks:
     external: true
 services:
     db:
-        image: 10.131.69.114:9000/fnms-mariadb:nokia-1.1.8
+        image: mariadb
         container_name: mariadb
         restart: always
         ports:
             - "3306:3306"
-        volumes:
-            - /home/nminhtuan/docker-mapping/mysql:/mariadb/data
+        #volumes:
+        #    - /home/nminhtuan/docker/volume/mysql:/mariadb/data
         environment:
             - MYSQL_ROOT_PASSWORD=mysql
         stdin_open: true
@@ -18,16 +18,24 @@ services:
         networks:
             - anv_net
 
-    booking:
-        image: tca:latest
+    tca:
+        image: tca
         container_name: tca
         restart: always
+        ports:
+            - "1099:1099"
+            - "8101:8101"
+            - "44444:44444"
+            - "5005:5005"
+            - "8181:8181"
         environment:
-            - DB_URL=localhost:3306
-            - DB_NAME=tca
+            - DB_URL=jdbc:mariadb://db:3306/tca
             - DB_USER=root
             - DB_PASS=mysql
+            - DEBUG=true
         stdin_open: true
         tty: true
+        depends_on:
+            - db
         networks:
             - anv_net

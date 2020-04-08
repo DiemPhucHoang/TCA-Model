@@ -13,6 +13,7 @@
         <module>tca-service</module>
         <module>tca-rest</module>
         <module>tca-features</module>
+        <module>tca-package</module>
     </modules>
 
     <properties>

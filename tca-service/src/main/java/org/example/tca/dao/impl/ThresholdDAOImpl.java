@@ -24,9 +24,13 @@ public class ThresholdDAOImpl implements ThresholdDAO {
     @Override
     @Transactional(Transactional.TxType.SUPPORTS)
     public List<Threshold> list(Model model) {
+        int page = 1;
+        int limit = 20;
         TypedQuery<Threshold> query = m_entityManager.createQuery("select t from Threshold t " +
                 "where t.model = :model", Threshold.class);
         query.setParameter("model", model);
+        query.setFirstResult((page-1) * limit);
+        query.setMaxResults(limit);
         return query.getResultList();
     }
 

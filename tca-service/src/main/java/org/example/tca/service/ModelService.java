@@ -13,8 +13,6 @@ public interface ModelService {
 
     ModelVO getModel(String name, String family);
 
-    void addModel(ModelVO modelVO) throws ModelException;
-
     void updateModel(String name, String family, ModelVO modelVO) throws ModelException;
 
     void deleteModel(String name, String family) throws ModelException;

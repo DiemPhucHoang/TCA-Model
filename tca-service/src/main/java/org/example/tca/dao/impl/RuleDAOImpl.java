@@ -24,10 +24,13 @@ public class RuleDAOImpl implements RuleDAO {
     @Override
     @Transactional(Transactional.TxType.SUPPORTS)
     public List<Rule> list(Threshold threshold) {
-
+        int page = 1;
+        int limit = 20;
         TypedQuery<Rule> query = m_entityManager.createQuery("select r from Rule r " +
                 "where r.threshold = :threshold", Rule.class);
         query.setParameter("threshold", threshold);
+        query.setFirstResult((page-1) * limit);
+        query.setMaxResults(limit);
         return query.getResultList();
     }
 

@@ -6,10 +6,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="tca-service" />
+        <module name="tca-features" />
         <module name="tca-rest" />
+        <module name="tca-service" />
         <module name="tca-api" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="package" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>

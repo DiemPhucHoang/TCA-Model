@@ -24,8 +24,15 @@ public class ModelDAOImpl implements ModelDAO {
     @Override
     @Transactional(Transactional.TxType.SUPPORTS)
     public List<Model> list() {
-        TypedQuery<Model> query = m_entityManager.createQuery("SELECT m FROM Model m", Model.class);
+        int page = 1;
+        int limit = 20;
+        Query query = m_entityManager.createQuery("From Model");
+        query.setFirstResult((page-1) * limit);
+        query.setMaxResults(limit);
         return query.getResultList();
+
+//        TypedQuery<Model> query = m_entityManager.createQuery("SELECT m FROM Model m", Model.class);
+//        return query.getResultList();
     }
 
     @Override

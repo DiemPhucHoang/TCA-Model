@@ -7,13 +7,13 @@
     <snapshot>
       <localCopy>true</localCopy>
     </snapshot>
-    <lastUpdated>20200408143738</lastUpdated>
+    <lastUpdated>20200408164719</lastUpdated>
     <snapshotVersions>
       <snapshotVersion>
         <classifier>features</classifier>
         <extension>xml</extension>
         <value>1.0-SNAPSHOT</value>
-        <updated>20200408143738</updated>
+        <updated>20200408164719</updated>
       </snapshotVersion>
     </snapshotVersions>
   </versioning>

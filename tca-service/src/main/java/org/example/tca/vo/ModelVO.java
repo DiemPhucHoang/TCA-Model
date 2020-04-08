@@ -31,6 +31,7 @@ public class ModelVO {
         this.date = ModelParsing.parseTime(model.getDate());
         this.author = model.getAuthor();
         this.activationTime = ModelParsing.parseTime(model.getActivationTime());
+        this.modelFileName = model.getModelFileName();
         this.noOfTCAs = model.getThresholds() == null ? 0 : model.getThresholds().size();
     }
 
@@ -43,6 +44,7 @@ public class ModelVO {
         this.date = modelVO.getDate();
         this.author = modelVO.getAuthor();
         this.activationTime = modelVO.getActivationTime();
+        this.modelFileName = modelVO.getModelFileName();
         this.thresholds = modelVO.getThresholds();
     }
 

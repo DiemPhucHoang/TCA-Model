@@ -29,7 +29,7 @@
         </jaxrs:providers>
     </jaxrs:server>
 
-    <reference id="centralizedService" interface="org.example.tca.service.CentralizedService"/>
+    <reference id="centralizedService" interface="org.example.tca.service.CentralizedService" availability="mandatory"/>
 
     <bean id="jsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
     <bean id="jacksonContextResolver" class="org.example.tca.provider.JacksonContextResolver"/>
