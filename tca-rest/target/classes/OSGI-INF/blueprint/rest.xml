@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:jaxrs="http://cxf.apache.org/blueprint/jaxrs"
+           xmlns:cxf="http://cxf.apache.org/blueprint/core"
+           xsi:schemaLocation="
+             http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+             http://cxf.apache.org/blueprint/jaxrs http://cxf.apache.org/schemas/blueprint/jaxrs.xsd
+             http://cxf.apache.org/blueprint/core http://cxf.apache.org/schemas/blueprint/core.xsd
+             ">
+
+    <cxf:bus>
+        <cxf:features>
+            <cxf:logging/>
+        </cxf:features>
+    </cxf:bus>
+
+    <jaxrs:server id="tcaRest" address="/api/tca">
+        <jaxrs:serviceBeans>
+            <ref component-id="modelBean" />
+            <ref component-id="thresholdBean" />
+            <ref component-id="ruleBean" />
+            <ref component-id="conditionBean" />
+            <ref component-id="alarmBean" />
+        </jaxrs:serviceBeans>
+        <jaxrs:providers>
+            <ref component-id="jsonProvider"/>
+            <ref component-id="jacksonContextResolver"/>
+        </jaxrs:providers>
+    </jaxrs:server>
+
+    <reference id="centralizedService" interface="org.example.tca.service.CentralizedService" availability="mandatory"/>
+
+    <bean id="jsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
+    <bean id="jacksonContextResolver" class="org.example.tca.provider.JacksonContextResolver"/>
+
+    <bean id="modelBean" class="org.example.tca.rest.impl.ModelRestImpl" >
+        <argument ref="centralizedService"/>
+    </bean>
+
+    <bean id="thresholdBean" class="org.example.tca.rest.impl.ThresholdRestImpl" >
+        <argument ref="centralizedService"/>
+    </bean>
+
+    <bean id="ruleBean" class="org.example.tca.rest.impl.RuleRestImpl" >
+        <argument ref="centralizedService"/>
+    </bean>
+
+    <bean id="conditionBean" class="org.example.tca.rest.impl.ConditionRestImpl" >
+        <argument ref="centralizedService"/>
+    </bean>
+
+    <bean id="alarmBean" class="org.example.tca.rest.impl.AlarmRestImpl" >
+        <argument ref="centralizedService"/>
+    </bean>
+
+</blueprint>
